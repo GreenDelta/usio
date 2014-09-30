@@ -3,7 +3,9 @@ from string import Template
 import xlrd
 
 techBook = xlrd.open_workbook('../data/open-io/DR Coefficients.xlsx')
+enviBook = xlrd.open_workbook('../data/open-io/Satellite xwalked.xlsx')
 techSheet = techBook.sheet_by_name('Data')
+enviSheet = enviBook.sheet_by_name('Data')
 categories = json.load(open('../data/naics_categories.json'))
 
 # number of sectors in the table
@@ -97,6 +99,32 @@ def make_footer():
 </ecoSpold>"""
 
 
+def make_interventions(column_label):
+    text = ""
+    for col in range(1, NUM+1):
+        if column_label != enviSheet.cell(0, col).value:
+            continue
+        for row in range(1, 826):
+            value = enviSheet.cell(row, col).value
+            if value == 0:
+                continue
+            flow = enviSheet.cell(row, 0).value
+            text += make_intervention(row+600, flow, value)
+        break
+    return text
+
+
+def make_intervention(i, flow, value):
+    template = Template("""
+            <exchange number="$i"
+                name="$name"
+                unit="kg"
+                meanValue="$value">
+                <outputGroup>4</outputGroup>
+            </exchange>""")
+    return template.substitute(i=i, name=flow, value=value)
+
+
 for col in range(1, NUM+1):
     colLabel = techSheet.cell(0, col).value
     text = make_header(colLabel)
@@ -106,7 +134,7 @@ for col in range(1, NUM+1):
             continue
         rowLabel = techSheet.cell(row, 0).value
         text += make_input(row+1, rowLabel, val)
-
+    text += make_interventions(colLabel)
     text += make_footer()
     f = open('../out/%s.xml' % col, 'w')
     f.write(text)
