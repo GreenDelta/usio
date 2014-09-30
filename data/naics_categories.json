@@ -1,0 +1,181 @@
+[
+{
+    "prefixes":["11"],
+    "name":"Agriculture, forestry, fishing, and hunting",
+    "childs": [
+        {
+            "prefixes":["111", "112"],
+            "name":"Farms"
+        },
+        {
+            "prefixes":["113", "114", "115"],
+            "name":"Forestry, fishing, and related activities"
+        }
+    ]
+},
+{
+    "prefixes":["21"],
+    "name":"Mining",
+    "childs": [
+        {"prefixes": ["211"], "name": "Oil and gas extraction"},
+        {"prefixes": ["212"], "name": "Mining, except oil and gas"},
+        {"prefixes": ["213"], "name": "Support activities for mining"}
+    ]
+},
+{
+    "prefixes":["22"],
+    "name":"Utilities",
+    "childs": [
+        {"prefixes": ["22"], "name": "Utilities"}
+    ]
+},
+{
+    "prefixes":["23"],
+    "name":"Construction",
+    "childs": [
+        {"prefixes": ["23"], "name": "Construction"}
+    ]
+},
+{
+    "prefixes":["3"],
+    "name":"Manufacturing",
+    "childs": [
+        {"prefixes": ["321"], "name": "Wood products"},
+        {"prefixes": ["327"], "name": "Nonmetallic mineral products"},
+        {"prefixes": ["331"], "name": "Primary metals"},
+        {"prefixes": ["332"], "name": "Fabricated metal products"},
+        {"prefixes": ["333"], "name": "Machinery"},
+        {"prefixes": ["334"], "name": "Computer and electronic products"},
+        {"prefixes": ["335"], "name": "Electrical equipment, appliances, and components"},
+        {"prefixes": ["3361", "3362", "3363"], "name": "Motor vehicles, bodies and trailers, and parts"},
+        {"prefixes": ["3364", "3365", "3366", "3369"], "name": "Other transportation equipment"},
+        {"prefixes": ["337"], "name": "Furniture and related products"},
+        {"prefixes": ["339"], "name": "Miscellaneous manufacturing"},
+        {"prefixes": ["311", "312"], "name": "Food and beverage and tobacco products"},
+        {"prefixes": ["313", "314"], "name": "Textile mills and textile product mills"},
+        {"prefixes": ["315", "316"], "name": "Apparel and leather and allied products"},
+        {"prefixes": ["322"], "name": "Paper products"},
+        {"prefixes": ["323"], "name": "Printing and related support activities"},
+        {"prefixes": ["324"], "name": "Petroleum and coal products"},
+        {"prefixes": ["325"], "name": "Chemical products"},
+        {"prefixes": ["326"], "name": "Plastics and rubber products"}
+    ]
+},
+{
+    "prefixes":["42"],
+    "name":"Wholesale trade",
+    "childs": [
+        {"prefixes": ["42"], "name": "Wholesale trade"}
+    ]
+},
+{
+    "prefixes":["44", "4A0"],
+    "name":"Retail trade",
+    "childs": [
+        {"prefixes": ["441"], "name": "Motor vehicle and parts dealers"},
+        {"prefixes": ["445"], "name": "Food and beverage stores"},
+        {"prefixes": ["452"], "name": "General merchandise stores"},
+        {"prefixes": ["4A0"], "name": "Other retail"}
+    ]
+},
+{
+    "prefixes":["48", "49"],
+    "name":"Transportation and warehousing",
+    "childs": [
+        {"prefixes": ["481"], "name": "Air transportation"},
+        {"prefixes": ["482"], "name": "Rail transportation"},
+        {"prefixes": ["483"], "name": "Water transportation"},
+        {"prefixes": ["484"], "name": "Truck transportation"},
+        {"prefixes": ["485"], "name": "Transit and ground passenger transportation"},
+        {"prefixes": ["486"], "name": "Pipeline transportation"},
+        {"prefixes": ["48A", "492"], "name": "Other transportation and support activities"},
+        {"prefixes": ["493"], "name": "Warehousing and storage"}
+    ]
+},
+{
+    "prefixes":["51"],
+    "name":"Information",
+    "childs": [
+        {"prefixes": ["511"], "name": "Publishing industries, except internet (includes software)"},
+        {"prefixes": ["512"], "name": "Motion picture and sound recording industries"},
+        {"prefixes": ["515", "517"], "name": "Broadcasting and telecommunications"},
+        {"prefixes": ["516", "518", "519"], "name": "Data processing, internet publishing, and other information services"}
+    ]
+},
+{
+    "prefixes":["52", "53", "S00800"],
+    "name":"Finance, insurance, real estate, rental, and leasing",
+    "childs": [
+    {"prefixes": ["52A", "522"], "name": "Federal Reserve banks, credit intermediation, and related activities"},
+    {"prefixes": ["523"], "name": "Securities, commodity contracts, and investments"},
+    {"prefixes": ["524"], "name": "Insurance carriers and related activities"},
+    {"prefixes": ["525"], "name": "Funds, trusts, and other financial vehicles"},
+    {"prefixes": ["531", "S00800"], "name": "Real estate"},
+    {"prefixes": ["532", "533"], "name": "Rental and leasing services and lessors of intangible assets"}
+    ]
+},
+{
+    "prefixes":["54", "55", "56"],
+    "name":"Professional and business services",
+    "childs": [
+        {"prefixes": ["5411"], "name": "Legal services"},
+        {"prefixes": ["5415"], "name": "Computer systems design and related services"},
+        {"prefixes": ["5412", "5413", "5414", "5416", "5417", "5418", "5419"], "name": "Miscellaneous professional, scientific, and technical services"},
+        {"prefixes": ["55"], "name": "Management of companies and enterprises"},
+        {"prefixes": ["561"], "name": "Administrative and support services"},
+        {"prefixes": ["562"], "name": "Waste management and remediation services"}
+    ]
+},
+{
+    "prefixes":["6"],
+    "name":"Educational services, health care, and social assistance",
+    "childs": [
+        {"prefixes": ["61"], "name": "Educational services"},
+        {"prefixes": ["621"], "name": "Ambulatory health care services"},
+        {"prefixes": ["622"], "name": "Hospitals"},
+        {"prefixes": ["623"], "name": "Nursing and residential care facilities"},
+        {"prefixes": ["624"], "name": "Social assistance"}
+    ]
+},
+{
+    "prefixes":["7"],
+    "name":"Arts, entertainment, recreation, accommodation, and food services",
+    "childs": [
+        {"prefixes": ["711", "712"], "name": "Performing arts, spectator sports, museums, and related activities"},
+        {"prefixes": ["713"], "name": "Amusements, gambling, and recreation industries"},
+        {"prefixes": ["721"], "name": "Accommodation"},
+        {"prefixes": ["722"], "name": "Food services and drinking places"}
+    ]
+},
+{
+    "prefixes":["81"],
+    "name":"Other services, except government",
+    "childs": [
+        {"prefixes": ["81"], "name": "Other services, except government"}
+    ]
+},
+{
+    "prefixes":["S00", "491"],
+    "name":"Government",
+    "childs": [
+        {"prefixes": ["S005", "S006"], "name": "Federal general government"},
+        {"prefixes": ["491", "S001"], "name": "Federal government enterprises"},
+        {"prefixes": ["S007"], "name": "State and local general government"},
+        {"prefixes": ["S002"], "name": "State and local government enterprises"}
+    ]
+},
+{
+    "prefixes":["S004"],
+    "name":"Scrap, used and secondhand goods",
+    "childs": [
+        {"prefixes": ["S004"], "name": "Scrap, used and secondhand goods"}
+    ]
+},
+{
+    "prefixes":["S00"],
+    "name":"Other",
+    "childs": [
+        {"prefixes": ["S003", "S009"], "name": "Other"}
+    ]
+}
+]
