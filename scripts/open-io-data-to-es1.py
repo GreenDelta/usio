@@ -122,7 +122,8 @@ def make_intervention(i, flow, value):
                 meanValue="$value">
                 <outputGroup>4</outputGroup>
             </exchange>""")
-    return template.substitute(i=i, name=flow, value=value)
+    name = flow.replace("<", "&lt;").replace(">", "&gt;").replace("’", "'")
+    return template.substitute(i=i, name=name, value=value)
 
 
 for col in range(1, NUM+1):
