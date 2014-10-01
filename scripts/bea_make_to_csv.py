@@ -18,8 +18,7 @@ def main():
     row_range = get_row_range(sheet)
     print("convert make table to csv rows=%s columns=%s: " % (row_range, col_range))
     f = open('../csv_out/bea_make.csv', 'w', newline='\n')
-    writer = csv.writer(f)
-    count = 0
+    writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
     for row in row_range:
         for col in col_range:
             val = sheet.cell(row, col).value
@@ -27,17 +26,17 @@ def main():
                 entry = init_entry(row, col, sheet)
                 entry.append(val)
                 writer.writerow(entry)
-                count += 1
-    print("%s entries" % count)
     f.close()
 
 
 def init_entry(row, col, sheet):
-    ind_id = sheet.cell(row, 0).value
+    ind_id_val = sheet.cell(row, 0).value
+    ind_id = int(ind_id_val) if type(ind_id_val) == float else ind_id_val
     ind_name = sheet.cell(row, 1).value
-    com_id = sheet.cell(5, col).value
+    com_id_val = sheet.cell(5, col).value
+    com_id = int(com_id_val) if type(com_id_val) == float else com_id_val
     com_name = sheet.cell(4, col).value
-    return [ind_id, ind_name, com_id, com_name]
+    return [str(ind_id), ind_name, str(com_id), com_name]
 
 
 def get_column_range(sheet):
