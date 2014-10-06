@@ -12,10 +12,10 @@ def main():
     with open('../csv_out/bea_make.csv', 'r', newline='\n') as f:
         reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in reader:
-            val = row[4]
+            val = row[2]
             ind_id = row[0]
             put_value(ind_totals, ind_id, val)
-            com_id = row[2]
+            com_id = row[1]
             put_value(com_totals, com_id, val)
     write_totals(ind_totals, 'bea_make_totals_ind.csv')
     write_totals(com_totals, 'bea_make_totals_com.csv')
