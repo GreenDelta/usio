@@ -30,7 +30,7 @@ def get_entries(sheet, rows, cols):
             val = sheet.cell(row, col).value
             if xls.is_zero(val):
                 continue
-            recipient = sheet.cell(col, 0).value
+            recipient = sheet.cell(0, col).value
             yield [code(provider), code(recipient), val]
 
 
