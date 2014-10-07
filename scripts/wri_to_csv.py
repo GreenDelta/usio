@@ -23,7 +23,7 @@ def write_materials(sheet):
     with open('../csv_out/wri_materials.csv', 'w', newline='\n') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for name in names:
-            writer.writerow([name, 'elementary flow'])
+            writer.writerow([name, 'product'])
 
 
 def process_sheet(sheet, file_name):
