@@ -43,7 +43,7 @@ def get_commodities():
 
 def get_elem_flows():
     elem_flows = {}
-    with f_open('oio_satellite_flows.csv') as f:
+    with f_open('oio_olca_flow_mapping.csv') as f:
         reader = csv.reader(f)
         for row in reader:
             key = row[0]
@@ -188,7 +188,7 @@ def make_interventions(interventions, elem_flows):
                 subCategory="$sub_category"
                 unit="$unit"
                 meanValue="$value">
-                <outputGroup>4</outputGroup>
+                <$direction>4</$direction>
             </exchange>""")
     i = 1000
     for key in interventions.keys():
@@ -197,12 +197,14 @@ def make_interventions(interventions, elem_flows):
             continue
         flow = elem_flows[key]
         category = flow['category']
+        group = 'inputGroup' if flow['direction'] == 'input' else 'outputGroup'
         xml_part += template.substitute(i=i,
                                         name=e(flow['name']),
                                         value=interventions[key],
                                         category=e(category[0]),
                                         sub_category=e(category[1]),
-                                        unit=flow['unit'])
+                                        unit=flow['unit'],
+                                        direction=group)
         i += 1
     return xml_part
 
