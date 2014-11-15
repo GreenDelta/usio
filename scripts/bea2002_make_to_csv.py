@@ -1,6 +1,10 @@
 """
 This script converts the make table from the BEA 2002 benchmark (IOMakeDetail.txt)
-to the following CSV files:
+to a CSV file with the following columns:
+
+1) The industry sectors which indicate the rows in the make table
+2) The commodities which are produced by the industries
+3) The amount of the respective commodity produced by the industry.
 
 * bea_make.csv: 1) industry code, 2) commodity code, 3) make value
 * bea_commodities: 1) commodity code, 2) commodity name
@@ -12,30 +16,20 @@ import csv
 
 
 def main():
-    ind_codes = {}
-    com_codes = {}
-    with open('../csv_out/bea_make.csv', 'w', newline='\n') as f:
+    with open('../csv_out/bea2002_make.csv', 'w', newline='\n') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in get_rows():
-            ind_codes[row[0]] = row[1]
-            com_codes[row[2]] = row[3]
+            ind_code = row[0]
+            ind_name = row[1]
+            com_code = row[2]
+            com_name = row[3]
             v = float(row[4])
             if v == 0:
                 continue
-            values = [row[0], row[2], v]
-            writer.writerow(values)
-    write_codes('../csv_out/bea_industries.csv', ind_codes)
-    write_codes('../csv_out/bea_commodities.csv', com_codes)
+            row_key = "%s - %s" % (ind_code, ind_name)
+            col_key = "%s - %s" % (com_code, com_name)
+            writer.writerow([row_key, col_key, v])
 
-
-def write_codes(path, codes):
-    keys = [key for key in codes.keys()]
-    keys.sort()
-    with open(path, 'w', newline='\n') as f:
-        writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
-        for key in keys:
-            row = [key, codes[key]]
-            writer.writerow(row)
 
 def get_rows():
     with open('../data/bea2002/IOMakeDetail.txt', 'r', newline='\n') as f:

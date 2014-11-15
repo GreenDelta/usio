@@ -1,8 +1,10 @@
 """
 This script converts the use table from the BEA 2002 benchmark (IOUseDetail.txt)
-to the following CSV files:
+to a CSV file with the following columns:
 
-* bea_use.csv: 1) industry code, 2) commodity code, 3) use value
+1) commodity
+2) industry
+3) value (producers' prices)
 
 """
 
@@ -10,13 +12,30 @@ import csv
 
 
 def main():
-    with open('../csv_out/bea_use.csv', 'w', newline='\n') as f:
+    with open('../csv_out/bea2002_use.csv', 'w', newline='\n') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in get_rows():
+            com_code = row['Commodity']
+            com_name = row['CommodityDescription']
+            ind_code = row['Industry']
+            ind_name = row['IndustryDescription']
             val = float(row['ProVal'])
             if val != 0:
-                values = [row['Industry'], row['Commodity'], val]
-                writer.writerow(values)
+                row_key = "%s - %s" % (com_code, com_name)
+                col_key = "%s - %s" % (ind_code, ind_name)
+                writer.writerow([row_key, col_key, val])
+
+
+def get_rows():
+    with open('../data/bea2002/IOUseDetail.txt', 'r', newline='\n') as f:
+        headers = None
+        i = 0
+        for line in f:
+            if i == 0:
+                headers = parse_header(line)
+            else:
+                yield parse_line(line, headers)
+            i += 1
 
 
 def parse_header(line):
@@ -50,18 +69,6 @@ def parse_line(line, headers):
         else:
             vals[header[0]] = line[start:].strip()
     return vals
-
-
-def get_rows():
-    with open('../data/bea2002/IOUseDetail.txt', 'r', newline='\n') as f:
-        headers = None
-        i = 0
-        for line in f:
-            if i == 0:
-                headers = parse_header(line)
-            else:
-                yield parse_line(line, headers)
-            i += 1
 
 
 if __name__ == '__main__':
