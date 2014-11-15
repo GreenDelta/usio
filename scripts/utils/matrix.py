@@ -23,6 +23,14 @@ class Matrix:
         self.row_index[row_key] = idx
         return idx
 
+    @property
+    def row_keys(self):
+        return self.row_index.keys()
+
+    @property
+    def col_keys(self):
+        return self.col_index.keys()
+
     def add_col(self, col_key):
         if col_key in self.col_index:
             return self.col_index[col_key]
@@ -66,7 +74,47 @@ class Matrix:
         if not r in self.values:
             return
         row_entries = self.values[r]
-        return row_entries[col] if col in row_entries else 0
+        return row_entries[c] if c in row_entries else 0
+
+    def get_col_sums(self):
+        sums = {}
+        for col_key in self.col_keys:
+            col_sum = 0
+            for row_key in self.row_keys:
+                val = self.get_entry(row_key, col_key)
+                col_sum += val
+            sums[col_key] = col_sum
+        return sums
+
+    def get_row_sums(self):
+        sums = {}
+        for row_key in self.row_keys:
+            row_sum = 0
+            for col_key in self.col_keys:
+                val = self.get_entry(row_key, col_key)
+                row_sum += val
+            sums[row_key] = row_sum
+        return sums
+
+    def entries(self):
+        for row_key in self.row_keys:
+            for col_key in self.col_keys:
+                val = self.get_entry(row_key, col_key)
+                if val != 0:
+                    yield (row_key, col_key, val)
+
+    def mult(self, other):
+        """
+        :type other Matrix
+        """
+        result = Matrix()
+        for row_key in self.row_keys:
+            for col_key in other.col_keys:
+                val = 0
+                for i in self.col_keys:
+                    val += self.get_entry(row_key, i) * other.get_entry(i, col_key)
+                result.add_entry(row_key, col_key, val)
+        return result
 
     @staticmethod
     def read_sparse_csv(file_path):
