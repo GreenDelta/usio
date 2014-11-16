@@ -126,14 +126,19 @@ class Matrix:
         return m
 
     def write_dense_csv(self, file_path):
+        row_keys = []
+        row_keys.extend(self.row_keys)
+        row_keys.sort()
+        col_keys = []
+        col_keys.extend(self.col_keys)
+        col_keys.sort()
         with open(file_path, 'w', newline='\n') as f:
             writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
             headers = ['']
-            for col in range(0, self.cols):
-                headers.append(self.get_col_key(col))
+            headers.extend(col_keys)
             writer.writerow(headers)
-            for row in range(0, self.rows):
-                entries = [self.get_row_key(row)]
-                for col in range(0, self.cols):
-                    entries.append(self.get_entry(row, col))
+            for row_key in row_keys:
+                entries = [row_key]
+                for col_key in col_keys:
+                    entries.append(self.get_entry(row_key, col_key))
                 writer.writerow(entries)
