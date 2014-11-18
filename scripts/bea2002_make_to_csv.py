@@ -6,10 +6,6 @@ to a CSV file with the following columns:
 2) The commodities which are produced by the industries
 3) The amount of the respective commodity produced by the industry.
 
-* bea_make.csv: 1) industry code, 2) commodity code, 3) make value
-* bea_commodities: 1) commodity code, 2) commodity name
-* bea_industries: 1) industry code, 2) industry name
-
 """
 
 import csv

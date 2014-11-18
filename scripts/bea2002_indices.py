@@ -1,5 +1,5 @@
 
-from utils.matrix import Matrix
+from iodb.matrix import Matrix
 
 use_table = Matrix.read_sparse_csv('../csv_out/bea2002_use.csv')
 make_table = Matrix.read_sparse_csv('../csv_out/bea2002_make.csv')
