@@ -11,8 +11,8 @@ commodities_use = use_table.row_keys
 commodities_make = make_table.col_keys
 commodities = []
 for com in commodities_use:
-    if com in commodities_make:
-        commodities.append(com)
+    # if com in commodities_make:
+    commodities.append(com)
 commodities.sort()
 
 industries_use = use_table.col_keys

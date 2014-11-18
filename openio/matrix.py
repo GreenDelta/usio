@@ -104,9 +104,6 @@ class Matrix:
                     yield (row_key, col_key, val)
 
     def mult(self, other):
-        """
-        :type other Matrix
-        """
         result = Matrix()
         for row_key in self.row_keys:
             for col_key in other.col_keys:
@@ -115,15 +112,6 @@ class Matrix:
                     val += self.get_entry(row_key, i) * other.get_entry(i, col_key)
                 result.add_entry(row_key, col_key, val)
         return result
-
-    @staticmethod
-    def read_sparse_csv(file_path):
-        m = Matrix()
-        with open(file_path, 'r', newline='\n') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                m.add_entry(row[0], row[1], row[2])
-        return m
 
     def write_dense_csv(self, file_path):
         row_keys = []
@@ -142,3 +130,12 @@ class Matrix:
                 for col_key in col_keys:
                     entries.append(self.get_entry(row_key, col_key))
                 writer.writerow(entries)
+
+
+def read_sparse_csv(file_path):
+    m = Matrix()
+    with open(file_path, 'r', newline='\n') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            m.add_entry(row[0], row[1], row[2])
+    return m
