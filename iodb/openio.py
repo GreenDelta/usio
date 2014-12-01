@@ -35,6 +35,20 @@ def use_to_csv(raw_use_xls, csv_file):
     _write_entries(sheet, rows, cols, csv_file)
 
 
+def dr_to_csv(dr_xls, csv_file):
+    """
+    Converts the Excel file with the direct requirement coefficients from the
+    OpenIO technology module to a commodity-by-commodity CSV matrix.
+    """
+    workbook = xlrd.open_workbook(dr_xls)
+    sheet = workbook.sheet_by_name('Data')
+    rows = xls.get_row_range(sheet, '1111A0 - Oilseed farming',
+                             'S00202 - State and local government electric utilities')
+    cols = xls.get_column_range(sheet, '1111A0 - Oilseed farming',
+                                'S00202 - State and local government electric utilities')
+    _write_entries(sheet, rows, cols, csv_file)
+
+
 def _write_entries(sheet, rows, cols, csv_file):
     with open(csv_file, 'w', newline='\n') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)

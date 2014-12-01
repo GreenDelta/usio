@@ -11,7 +11,8 @@ def dr_matrix_from_oio():
     make_table = iodb.read_sparse_matrix('../csv_out/oio_make.csv')
     use_table = iodb.read_sparse_matrix('../csv_out/oio_use.csv')
     coefficients = iodb.calculate_dr_coefficients(use_table, make_table)
-    coefficients.write_dense_csv('../csv_out/oio_dr_calculated.csv')
+    coefficients.write_dense_csv('../csv_out/oio_dr_calculated_dense.csv')
+    coefficients.write_sparse_csv('../csv_out/oio_dr_calculated_sparse.csv')
 
 
 def dr_matrix_from_example():

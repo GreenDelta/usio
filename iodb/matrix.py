@@ -71,7 +71,7 @@ class Matrix:
             c = self.col_index[col] if col in self.col_index else None
         if r is None or c is None:
             return 0
-        if not r in self.values:
+        if r not in self.values:
             return
         row_entries = self.values[r]
         return row_entries[c] if c in row_entries else 0
@@ -149,6 +149,20 @@ class Matrix:
                 for col_key in col_keys:
                     entries.append(self.get_entry(row_key, col_key))
                 writer.writerow(entries)
+
+    def write_sparse_csv(self, file_path):
+        row_keys = [r for r in self.row_keys]
+        row_keys.sort()
+        col_keys = [c for c in self.col_keys]
+        col_keys.sort()
+        with open(file_path, 'w', newline='\n') as f:
+            writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
+            for row in row_keys:
+                for col in col_keys:
+                    val = self.get_entry(row, col)
+                    if val == 0:
+                        continue
+                    writer.writerow([row, col, val])
 
 
 def read_sparse_csv(file_path):
