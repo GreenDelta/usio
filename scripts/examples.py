@@ -14,7 +14,7 @@ def dr_matrix_from_oio():
     coefficients.write_dense_csv('../csv_out/oio_dr_calculated.csv')
 
 
-def dr_matrix_from_bea2002():
+def dr_matrix_from_example():
     make_table = iodb.read_sparse_matrix('../data/example/make_table.csv')
     use_table = iodb.read_sparse_matrix('../data/example/use_table.csv')
     coefficients = iodb.calculate_dr_coefficients(use_table, make_table)
