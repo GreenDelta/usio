@@ -1,4 +1,5 @@
 import argparse
+import iodb
 import iodb.bea2002 as bea
 import os
 import shutil
@@ -28,7 +29,23 @@ def tech():
         make_csv = os.path.abspath("./build/" + name)
         bea.make_to_csv(make_bea, make_csv)
 
+    def use_fn(name):
+        use_bea = os.path.abspath("./data/bea2002/redef/IOUseDetail.txt")
+        use_csv = os.path.abspath("./build/" + name)
+        bea.use_to_csv(use_bea, use_csv)
+
+    def dr_fn(name):
+        make_table = iodb.read_sparse_matrix(
+            os.path.abspath("./build/make_table.csv"))
+        use_table = iodb.read_sparse_matrix(
+            os.path.abspath("./build/use_table.csv"))
+        dr = iodb.calculate_dr_coefficients(use_table, make_table)
+        path = os.path.abspath("./build/" + name)
+        dr.write_sparse_csv(path)
+
     make_resource("make_table.csv", make_fn)
+    make_resource("use_table.csv", use_fn)
+    make_resource("dr_coefficients.csv", dr_fn)
 
 
 def make_resource(name, fn):
