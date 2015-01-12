@@ -1,5 +1,6 @@
 import argparse
 import iodb
+import iodb.products
 import iodb.bea2002 as bea
 import os
 import shutil
@@ -48,6 +49,19 @@ def tech():
     make_resource("dr_coefficients.csv", dr_fn)
 
 
+def products():
+    tech()
+    print("products: ")
+
+    def fn(name):
+        dr_csv = os.path.abspath("./build/dr_coefficients.csv")
+        cat_json = os.path.abspath("./data/naics_categories.json")
+        prod_csv = os.path.abspath("./build/" + name)
+        iodb.products.make_product_table(dr_csv, cat_json, prod_csv)
+
+    make_resource("products.csv", fn)
+
+
 def make_resource(name, fn):
     if not os.path.isdir("./build"):
         os.makedirs("./build")
@@ -91,6 +105,8 @@ def main():
             print_help()
         elif cmd == "tech":
             tech()
+        elif cmd == "products":
+            products()
         else:
             print("unknown command '%s'" % cmd)
             print_help()
