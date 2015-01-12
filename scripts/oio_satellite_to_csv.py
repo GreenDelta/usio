@@ -16,7 +16,8 @@ def main():
 
 
 def write_entries(sheet, rows, cols):
-    with open('../csv_out/oio_satellite_entries.csv', 'w', newline='\n') as f:
+    with open('../csv_out/oio_satellite_entries.csv', 'w', newline='\n',
+              encoding="utf-8") as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in get_entries(sheet, rows, cols):
             writer.writerow(row)
@@ -30,8 +31,7 @@ def get_entries(sheet, rows, cols):
             if xls.is_zero(val):
                 continue
             sector = sheet.cell(0, col).value
-            code = sector.partition(' - ')[0]
-            yield [code, flow, val]
+            yield [sector, flow, val]
 
 
 if __name__ == '__main__':

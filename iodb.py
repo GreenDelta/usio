@@ -62,6 +62,17 @@ def products():
     make_resource("products.csv", fn)
 
 
+def envi():
+    print("envi: ")
+
+    def oio_fn(name):
+        src = os.path.abspath("./data/open-io/satellite_matrix_entries.csv")
+        tgt = os.path.abspath("./build/" + name)
+        shutil.copyfile(src, tgt)
+
+    make_resource("env_oio.csv", oio_fn)
+
+
 def make_resource(name, fn):
     if not os.path.isdir("./build"):
         os.makedirs("./build")
@@ -107,6 +118,8 @@ def main():
             tech()
         elif cmd == "products":
             products()
+        elif cmd == "envi":
+            envi()
         else:
             print("unknown command '%s'" % cmd)
             print_help()
