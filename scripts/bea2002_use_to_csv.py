@@ -12,7 +12,7 @@ import csv
 
 
 def main():
-    with open('../csv_out/bea2002_use.csv', 'w', newline='\n') as f:
+    with open('../csv_out/bea2002_use_no_redef.csv', 'w', newline='\n') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
         for row in get_rows():
             com_code = row['Commodity']
@@ -27,7 +27,7 @@ def main():
 
 
 def get_rows():
-    with open('../data/bea2002/IOUseDetail.txt', 'r', newline='\n') as f:
+    with open('../data/bea2002/no_redef/REV_NAICSUseDetail 4-24-08.txt', 'r', newline='\n') as f:
         headers = None
         i = 0
         for line in f:
