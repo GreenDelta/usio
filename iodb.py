@@ -7,6 +7,9 @@ import iodb.spold
 import os
 import shutil
 
+import threading
+import time
+import sys
 
 def clean():
     print("clean:")
@@ -93,13 +96,15 @@ def spold():
 
     print("spold: ")
 
-    tech_csv = os.path.abspath("./build/dr_coefficients.csv")
-    product_csv = os.path.abspath("./build/products.csv")
-    sat_csv = os.path.abspath("./build/satellite.csv")
-    flow_csv = os.path.abspath("./build/flows.csv")
-    spold = os.path.abspath("./build/spold.zip")
+    def fn(name):
+        tech_csv = os.path.abspath("./build/dr_coefficients.csv")
+        product_csv = os.path.abspath("./build/products.csv")
+        sat_csv = os.path.abspath("./build/satellite.csv")
+        flow_csv = os.path.abspath("./build/flows.csv")
+        spold = os.path.abspath("./build/" + name)
+        iodb.spold.make_package(tech_csv, product_csv, sat_csv, flow_csv, spold)
 
-    iodb.spold.make_package(tech_csv, product_csv, sat_csv, flow_csv, spold)
+    make_resource("spold.zip", fn)
 
 
 def make_resource(name, fn):
@@ -109,8 +114,38 @@ def make_resource(name, fn):
         print("  %s already exists" % name)
         return
     else:
+        clock = make_clock_thread()
+        clock.start()
         fn(name)
+        clock.stopped = True
+        clock.join()
         print("  %s created" % name)
+
+
+def make_clock_thread():
+
+    class Clock(threading.Thread):
+
+        def __init__(self):
+            threading.Thread.__init__(self)
+            self.stopped = False
+
+        def run(self):
+            i = 0
+            while not self.stopped:
+                time.sleep(0.1)
+                clock = ['|', '/', '-', '\\']
+                c = i % 4
+                if c == 0:
+                    i = 1
+                sys.stdout.write("\r%s" % clock[c])
+                sys.stdout.flush()
+                sys.stdout.write("\r")
+                sys.stdout.flush()
+                i += 1
+
+    return Clock()
+
 
 
 def print_help():
