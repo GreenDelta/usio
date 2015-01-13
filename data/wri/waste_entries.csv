@@ -1,0 +1,153 @@
+"1111A0 - Oilseed farming","Peanuts",109.0539451666587
+"1111A0 - Oilseed farming","Soybeans",15796.33631456713
+"1111A0 - Oilseed farming","Sunflowers",304.3388987884225
+"1111B0 - Grain farming","barley",1538.3683269211376
+"1111B0 - Grain farming","corn",130425.229899323
+"1111B0 - Grain farming","hay",69836.002488319
+"1111B0 - Grain farming","Millet",59.266527559758
+"1111B0 - Grain farming","Oats",2071.6444196860716
+"1111B0 - Grain farming","Rice",393.3418164348064
+"1111B0 - Grain farming","rye",39.899044103735
+"1111B0 - Grain farming","sorghum",10525.993988355789
+"1111B0 - Grain farming","Wheat",8810.33106659455
+"111200 - Vegetable and melon farming","beans",66.6560487905236
+"111200 - Vegetable and melon farming","corn",1868.33909769782
+"111200 - Vegetable and melon farming","potatoes",1557.3818721463465
+"111200 - Vegetable and melon farming","veggies",2115.319742591247
+"111335 - Tree nut farming","Tree Nuts",17.5503489141495
+"1113A0 - Fruit farming","citrus fruit",923.0836782316501
+"1113A0 - Fruit farming","non-citrus fruit",1010.958892593753
+"111400 - Greenhouse, nursery, and floriculture production","mushrooms",26.8752579184514
+"111920 - Cotton farming","cotton",2277.9
+"111920 - Cotton farming","cottonseed",1891.181409007596
+"1119A0 - Sugarcane and sugar beet farming","Sugar Beets",1766.704432803114
+"1119A0 - Sugarcane and sugar beet farming","Sugar Cane",861.9662864792581
+"112120 - Dairy cattle and milk production","Milk & Milk Products",4461.645585295373
+"1121A0 - Cattle ranching and farming","beef",491.251022721586
+"1121A0 - Cattle ranching and farming","byproducts of animal processing",22543.327891051522
+"1121A0 - Cattle ranching and farming","cattle live",1033.1
+"1121A0 - Cattle ranching and farming","Lamb and mutton meat",6.05589929030955
+"1121A0 - Cattle ranching and farming","Pork",361.055067493805
+"112300 - Poultry and egg production","chicken live",438.7
+"112300 - Poultry and egg production","chicken meat",400.418412880817
+"112300 - Poultry and egg production","Eggs",247.421702849327
+"112300 - Poultry and egg production","Live turkeys",85.8
+"112300 - Poultry and egg production","Turkey meat",102.944408421388
+"112A00 - Animal production, except cattle and poultry and eggs","live pigs",154.2
+"112A00 - Animal production, except cattle and poultry and eggs","Wool",49.4
+"113A00 - Forest nurseries, forest products, and timber tracts","Other Industrial Roundwood",16490.91
+"113A00 - Forest nurseries, forest products, and timber tracts","Rubber (crude natural)",86.23788
+"114100 - Fishing","Fishery Products",1296.456207002007
+"212100 - Coal mining","Coke",21643.612722000005
+"212210 - Iron ore mining","Iron & Steel",15834.800000000007
+"212230 - Copper, nickel, lead, and zinc mining","Copper",1079.900000000001
+"212230 - Copper, nickel, lead, and zinc mining","Lead",426.5
+"212230 - Copper, nickel, lead, and zinc mining","Nickel",21.689019895288002
+"212230 - Copper, nickel, lead, and zinc mining","Zinc",1057.0
+"2122A0 - Gold, silver, and other metal ore mining","Chromium",3.0
+"2122A0 - Gold, silver, and other metal ore mining","Columbium",4.3
+"2122A0 - Gold, silver, and other metal ore mining","Gold",0.129
+"2122A0 - Gold, silver, and other metal ore mining","Manganese",430.0
+"2122A0 - Gold, silver, and other metal ore mining","Molybdenum",22.200000000000003
+"2122A0 - Gold, silver, and other metal ore mining","Rare earths",5.686999999999999
+"2122A0 - Gold, silver, and other metal ore mining","Silver",3.0601760000000002
+"2122A0 - Gold, silver, and other metal ore mining","Thorium",0.006
+"2122A0 - Gold, silver, and other metal ore mining","Tin",35.85
+"2122A0 - Gold, silver, and other metal ore mining","Tungsten",10.12968
+"2122A0 - Gold, silver, and other metal ore mining","Vanadium",2.7317440545605987
+"2122A0 - Gold, silver, and other metal ore mining","Yttrium",0.454
+"212310 - Stone mining and quarrying","Crushed stone",18075.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Clay, ball",1141.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Clay, bentonite",3360.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Clay, common",1896.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Clay, fire clay",476.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Clay, fullers earth",2677.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Clay, kaolin",8800.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Feldspar",786.0
+"212320 - Sand, gravel, clay, and ceramic and refractory minerals mining and quarrying","Sand & Gravel industrial",21840.0
+"212390 - Other nonmetallic mineral mining and quarrying","Arsenic",0.750267541410758
+"212390 - Other nonmetallic mineral mining and quarrying","Barite",123.0
+"212390 - Other nonmetallic mineral mining and quarrying","Boron",391.85
+"212390 - Other nonmetallic mineral mining and quarrying","Fluorspar",622.0
+"212390 - Other nonmetallic mineral mining and quarrying","Lithium",1.0650662473304504
+"212390 - Other nonmetallic mineral mining and quarrying","Potash",560.0
+"212390 - Other nonmetallic mineral mining and quarrying","Salt",11713.2
+"212390 - Other nonmetallic mineral mining and quarrying","Soda ash",3279.0
+"212390 - Other nonmetallic mineral mining and quarrying","Sodium sulfate",40.0
+"212390 - Other nonmetallic mineral mining and quarrying","Strontium",32.396
+"212390 - Other nonmetallic mineral mining and quarrying","Sulfur",11750.0
+"221200 - Natural gas distribution","Butane",15567.99999999998
+"321100.0 - Sawmills and wood preservation","Lumber",8301.37423644475
+"321219.0 - Reconstituted wood product manufacturing","Wood Panels",3485.55746205277
+"32121A - Veneer and plywood manufacturing","Plywood & Laminated Veneer Lumber (LVL)",3896.8
+"321999.0 - All other miscellaneous wood product manufacturing","Lumber",386.075763555251
+"322110.0 - Pulp mills","Paper & Board",42985.42999999998
+"324121 - Asphalt paving mixture and block manufacturing","Asphalt & Road Oil",1107.689974
+"324122 - Asphalt shingle and coating materials manufacturing","Asphalt & Road Oil",2832.7579746
+"325120 - Industrial gas manufacturing","Helium",2.08
+"325120 - Industrial gas manufacturing","Nitrogen",1540.0
+"325181 - Alkalies and chlorine manufacturing","Caustic Soda",14912.0
+"325181 - Alkalies and chlorine manufacturing","Chlorine",13315.0
+"325181 - Alkalies and chlorine manufacturing","Soda ash",3152.0
+"325188 - All other basic inorganic chemical manufacturing","Antimony",36.4572
+"325188 - All other basic inorganic chemical manufacturing","Arsenic",0.469732458589243
+"325188 - All other basic inorganic chemical manufacturing","Boron",50.71000000000001
+"325188 - All other basic inorganic chemical manufacturing","Bromine",192.78
+"325188 - All other basic inorganic chemical manufacturing","Chromium",53.0
+"325188 - All other basic inorganic chemical manufacturing","Cobalt",0.870857142857143
+"325188 - All other basic inorganic chemical manufacturing","Iodine",6.33
+"325188 - All other basic inorganic chemical manufacturing","Lead",54.64
+"325188 - All other basic inorganic chemical manufacturing","Lithium",1.7349337526695499
+"325188 - All other basic inorganic chemical manufacturing","Magnesium compounds",709.0
+"325188 - All other basic inorganic chemical manufacturing","Magnesium metal",129.5029425723778
+"325188 - All other basic inorganic chemical manufacturing","Manganese",124.0
+"325188 - All other basic inorganic chemical manufacturing","Mercury",0.14
+"325188 - All other basic inorganic chemical manufacturing","Nickel",48.73618879056047
+"325188 - All other basic inorganic chemical manufacturing","Phosphoric acid",430.0
+"325188 - All other basic inorganic chemical manufacturing","Rare earths",6.413
+"325188 - All other basic inorganic chemical manufacturing","Rubidium",0.002
+"325188 - All other basic inorganic chemical manufacturing","Selenium",0.1372
+"325188 - All other basic inorganic chemical manufacturing","Sodium sulfate",360.0
+"325188 - All other basic inorganic chemical manufacturing","Strontium",0.728
+"325188 - All other basic inorganic chemical manufacturing","Tin",9.0
+"325188 - All other basic inorganic chemical manufacturing","Titanium dioxide",1150.0
+"325188 - All other basic inorganic chemical manufacturing","Tungsten",0.10232
+"325188 - All other basic inorganic chemical manufacturing","Zinc",196.0
+"325211 - Plastics material and resin manufacturing","Total plastic and synthetic fibers",27318.9089260031
+"325220 - Artificial and synthetic fibers and filaments manufacturing","Total plastic and synthetic fibers",10954.677073997
+"3274A0 - Lime and gypsum product manufacturing","Lime",12846.0
+"327910 - Abrasive product manufacturing","Abrasives (Manufactured)",436.4
+"327992 - Ground or treated mineral and earth manufacturing","Diamonds, industrial",0.0882
+"327992 - Ground or treated mineral and earth manufacturing","Diatomite",426.0
+"327992 - Ground or treated mineral and earth manufacturing","Garnet",63.89999999999999
+"327992 - Ground or treated mineral and earth manufacturing","Graphite",32.0
+"327992 - Ground or treated mineral and earth manufacturing","Gypsum",600.0
+"327992 - Ground or treated mineral and earth manufacturing","Mica, natural sheet",5.5
+"327992 - Ground or treated mineral and earth manufacturing","Mica, scrap and flake",119.0
+"327992 - Ground or treated mineral and earth manufacturing","Perlite",146.0
+"327992 - Ground or treated mineral and earth manufacturing","Pumice & pumicite",444.0
+"327992 - Ground or treated mineral and earth manufacturing","Silicon",260.0
+"327992 - Ground or treated mineral and earth manufacturing","Talc & Pyrophyllite",967.0
+"327992 - Ground or treated mineral and earth manufacturing","Vermiculite",45.0
+"327999 - Miscellaneous nonmetallic mineral products","Asbestos",13.65
+"331110 - Iron and steel mills and ferroalloy manufacturing","Silicon",397.0
+"33131A - Alumina refining and primary aluminum production","Aluminum",4045.0
+"33131A - Alumina refining and primary aluminum production","Gallium",0.039992999999999994
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Antimony",4.94
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Beryllium",0.24
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Bismuth",2.0235000000000003
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Cadmium",1.735
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Cobalt",7.343142857142853
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Germanium",0.03
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Hafnium",0.06
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Indium",0.055
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Mercury",-0.14
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Molybdenum",10.899999999999999
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Nickel",60.96479131415154
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Rhenium",0.019200000000000002
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Selenium",0.5488
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Silver",1.943024
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Tantalum",0.65
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Tellurium",0.005230000000000001
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Titanium sponge metal",17.8
+"331419 - Primary smelting and refining of nonferrous metal (except copper and aluminum)","Zirconium",170.0000000000002

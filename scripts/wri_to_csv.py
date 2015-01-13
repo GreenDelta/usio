@@ -36,8 +36,10 @@ def process_sheet(sheet, file_name):
             if xls.is_zero(val):
                 continue
             code = sheet.cell(row, 0).value
+            sec_name = sheet.cell(row, 1).value
+            sector = "%s - %s" % (code, sec_name)
             material = sheet.cell(6, col).value
-            entries.append((code, material, val))
+            entries.append((sector, material, val))
     write_entries(entries, file_name)
 
 

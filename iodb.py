@@ -1,7 +1,8 @@
 import argparse
 import iodb
-import iodb.products
 import iodb.bea2002 as bea
+import iodb.products
+import iodb.openio
 import os
 import shutil
 
@@ -62,15 +63,27 @@ def products():
     make_resource("products.csv", fn)
 
 
-def envi():
-    print("envi: ")
+def sat():
+    print("sat: ")
 
     def oio_fn(name):
         src = os.path.abspath("./data/open-io/satellite_matrix_entries.csv")
         tgt = os.path.abspath("./build/" + name)
         shutil.copyfile(src, tgt)
 
-    make_resource("env_oio.csv", oio_fn)
+    make_resource("satellite.csv", oio_fn)
+
+
+def flows():
+    sat()
+    print("flows: ")
+
+    def oio_fn(name):
+        sat_csv = os.path.abspath("./build/satellite.csv")
+        flow_csv = os.path.abspath("./build/" + name)
+        iodb.openio.make_flow_table(sat_csv, flow_csv)
+
+    make_resource("flows.csv", oio_fn)
 
 
 def make_resource(name, fn):
@@ -94,7 +107,7 @@ def print_help():
     help         prints this help
     tech         build the technology matrix
     products     create the table with product flows
-    envi         build the satellite matrices
+    sat          build the satellite matrices
     flows        create the table with elementary flows
     spold        create the EcoSpold files
     """)
@@ -109,17 +122,11 @@ def main():
     commands = args.commands
     if len(commands) == 0:
         print_help()
+    funcs = {"clean": clean, "help": print_help, "tech": tech,
+             "products":products, "sat":sat, "flows": flows}
     for cmd in commands:
-        if cmd == "clean":
-            clean()
-        elif cmd == "help":
-            print_help()
-        elif cmd == "tech":
-            tech()
-        elif cmd == "products":
-            products()
-        elif cmd == "envi":
-            envi()
+        if cmd in funcs:
+            funcs[cmd]()
         else:
             print("unknown command '%s'" % cmd)
             print_help()
