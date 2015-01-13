@@ -161,6 +161,7 @@ def print_help():
     sat          build the satellite matrices
     flows        create the table with elementary flows
     spold        create the EcoSpold files
+    all          executes all tasks
     """)
 
 
@@ -174,7 +175,8 @@ def main():
     if len(commands) == 0:
         print_help()
     funcs = {"clean": clean, "help": print_help, "tech": tech,
-             "products":products, "sat":sat, "flows": flows, "spold": spold}
+             "products":products, "sat":sat, "flows": flows, "spold": spold,
+             "all": spold}
     for cmd in commands:
         if cmd in funcs:
             funcs[cmd]()
