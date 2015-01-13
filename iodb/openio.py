@@ -38,8 +38,9 @@ def _make_flow(key):
         return None
     values = [x.strip() for x in key.rsplit(',', 2)]
     if len(values) != 3:
-        print("  ignored elementary flow: %s" % key)
+        # print("  ignored elementary flow: %s" % key)
         return None
+    values.insert(0, key)
     values.append("kg")
     values.append("output")
     return values

@@ -3,6 +3,7 @@ import iodb
 import iodb.bea2002 as bea
 import iodb.products
 import iodb.openio
+import iodb.spold
 import os
 import shutil
 
@@ -86,6 +87,21 @@ def flows():
     make_resource("flows.csv", oio_fn)
 
 
+def spold():
+    products()
+    flows()
+
+    print("spold: ")
+
+    tech_csv = os.path.abspath("./build/dr_coefficients.csv")
+    product_csv = os.path.abspath("./build/products.csv")
+    sat_csv = os.path.abspath("./build/satellite.csv")
+    flow_csv = os.path.abspath("./build/flows.csv")
+    spold = os.path.abspath("./build/spold.zip")
+
+    iodb.spold.make_package(tech_csv, product_csv, sat_csv, flow_csv, spold)
+
+
 def make_resource(name, fn):
     if not os.path.isdir("./build"):
         os.makedirs("./build")
@@ -123,7 +139,7 @@ def main():
     if len(commands) == 0:
         print_help()
     funcs = {"clean": clean, "help": print_help, "tech": tech,
-             "products":products, "sat":sat, "flows": flows}
+             "products":products, "sat":sat, "flows": flows, "spold": spold}
     for cmd in commands:
         if cmd in funcs:
             funcs[cmd]()
