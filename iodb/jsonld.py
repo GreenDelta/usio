@@ -52,43 +52,87 @@ def make_package(tech_csv, products_csv, sat_csv):
     pass
 
 
-def _read_products(products_csv):
-    products = {}
-    with open(products_csv, mode='r', encoding='utf-8', newline='\n') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            products[row[0]] = row
-    return products
-
-
 def _write_product_data(product_csv, pack):
+    _write_categories(product_csv, pack)
+    _write_economic_units(pack)
+
+
+def _write_categories(product_csv, pack):
+    categories = []
     with open(product_csv, mode='r', encoding='utf-8', newline='\n') as f:
         reader = csv.reader(f)
         for row in reader:
-            info = SectorInfo()
-            name = row[2]
-            info.name = name
-            _write_categories(row[3], row[4], info)
+            top = row[3]
+            sub = row[4]
+            top_flow = get_category_id("FLOW", top)
+            if top_flow not in categories:
+                _write_category("FLOW", top, pack)
+                categories.append(top_flow)
+            sub_flow = get_category_id("FLOW", sub, top)
+            if sub_flow not in categories:
+                _write_category("FLOW", sub, pack, top)
+                categories.append(sub_flow)
+            top_proc = get_category_id("PROCESS", top)
+            if top_proc not in categories:
+                _write_category("PROCESS", top, pack)
+                categories.append(top_proc)
+            sub_proc = get_category_id("PROCESS", sub, top)
+            if sub_proc not in categories:
+                _write_category("PROCESS", sub, pack, top)
+                categories.append(sub_proc)
 
 
-def _write_categories(top_cat, sub_cat, info):
-    tflow_id = uuid.uuid3(uuid.NAMESPACE_OID, "%s/%s" % (top_cat, "FLOW"))
-
-
-def _write_category(name, model_type, pack, parent=None):
-    id = uuid.uuid3(uuid.NAMESPACE_OID, "Category/%s/%s" % (name, model_type))
+def _write_category(model_type, name, pack, parent_name=None):
+    uid = get_category_id(model_type, name, parent_name)
     c = {
         "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
         "@type": "Category",
+        "@id": uid,
         "name": name,
         "modelType": model_type
     }
-    if parent is not None:
-        c["parentCategory"] = {"@type": "Category", "@id": parent}
-    path = "categories/%s.json" % id
+    if parent_name is not None:
+        parent_id = get_category_id(model_type, parent_name)
+        c["parentCategory"] = {"@type": "Category", "@id": parent_id}
+    path = "categories/%s.json" % uid
     pack.writestr(path, json.dumps(c))
     print("write category %s" % path)
-    return id
+    return uid
+
+
+def get_category_id(model_type, name, parent_name=None):
+    n = name
+    if parent_name is not None:
+        n = parent_name + "/" + n
+    return str(uuid.uuid3(uuid.NAMESPACE_OID,
+                          "Category/%s/%s" % (n, model_type)))
+
+
+def _write_economic_units(pack):
+    ug = {"@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+          "@type": "UnitGroup",
+          "@id": "5df2915b-186f-4773-9ef4-04baca5e56a9",
+          "name": "Units of currency 2002",
+          "units": [{"@type": "Unit",
+                     "@id": "3f90ee51-c78b-4b15-a693-e7f320c1e894",
+                     "name": "USD",
+                     "referenceUnit": True,
+                     "conversionFactor": 1.0
+                     }]}
+    ug = json.dumps(ug)
+    pack.writestr("unit_groups/5df2915b-186f-4773-9ef4-04baca5e56a9.json", ug)
+    fp = {"@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+          "@type": "FlowProperty",
+          "@id": "b0682037-e878-4be4-a63a-a7a81053a691",
+          "name": "Market value US 2002",
+          "flowPropertyType": "ECONOMIC_QUANTITY",
+          "unitGroup": {
+              "@type": "UnitGroup",
+              "@id": "5df2915b-186f-4773-9ef4-04baca5e56a9"
+          }}
+    fp = json.dumps(fp)
+    pack.writestr("flow_properties/b0682037-e878-4be4-a63a-a7a81053a691.json",
+                  fp)
 
 
 class SectorInfo:
@@ -96,22 +140,18 @@ class SectorInfo:
         self.name = None
         self.product_id = None
         self.process_id = None
-        self.category_id = None
 
 
+    if __name__ == '__main__':
+        pack = azip.ZipFile('../build/package.zip', mode='w',
+                            compression=azip.ZIP_DEFLATED)
+        # _write_product_data('../build/products.csv', pack)
+        _write_product_data('../build/products.csv', pack)
 
-
-if __name__ == '__main__':
-
-    pack = azip.ZipFile('../build/package.zip', mode='w',
-                        compression=azip.ZIP_DEFLATED)
-    # _write_product_data('../build/products.csv', pack)
-    _write_category("buildings", "FLOW", pack)
-
-    """
-    p = Process()
-    p.name = "Test"
-    p.location = Ref("Location", "uuid")
-    print(json.dumps(p.as_json()))
-    """
+        """
+        p = Process()
+        p.name = "Test"
+        p.location = Ref("Location", "uuid")
+        print(json.dumps(p.as_json()))
+        """
 
