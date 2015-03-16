@@ -10,7 +10,6 @@ from org.openlca.jsonld import ZipStore
 from org.openlca.jsonld.output import JsonExport
 
 ZIP_PATH = "C:/Users/Public/iodb_flows.zip"
-CSV_PATH = "C:/Users/Public/iodb_flows.csv"
 
 ref_ids = [
     "7ae371ac-8532-11e0-9d78-0800200c9a66",
