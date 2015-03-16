@@ -55,6 +55,35 @@ def make_package(tech_csv, products_csv, sat_csv):
 def _write_product_data(product_csv, pack):
     _write_categories(product_csv, pack)
     _write_economic_units(pack)
+    _write_products(product_csv, pack)
+
+
+def _write_products(product_csv, pack):
+    with open(product_csv, mode='r', encoding='utf-8', newline='\n') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            uid = str(uuid.uuid3(uuid.NAMESPACE_OID, "Flow/" + row[0]))
+            cat_id = get_category_id("FLOW", row[4], row[3])
+            flow = {
+                "@context": "http://greendelta.github.io/olca-schema/context.jsonld",
+                "@type": "Flow",
+                "@id": uid,
+                "name": row[2],
+                "category": {"@type": "Category", "@id": cat_id},
+                "flowType": "PRODUCT_FLOW",
+                "flowProperties": [
+                    {
+                        "@type": "FlowPropertyFactor",
+                        "referenceFlowProperty": True,
+                        "conversionFactor": 1.0,
+                        "flowProperty": {
+                            "@type": "FlowProperty",
+                            "@id": "b0682037-e878-4be4-a63a-a7a81053a691"
+                        }}]
+            }
+            path = "flows/%s.json" % uid
+            print("write flow %s" % path)
+            pack.writestr(path, json.dumps(flow))
 
 
 def _write_categories(product_csv, pack):
