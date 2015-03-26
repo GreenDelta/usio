@@ -4,10 +4,44 @@ import pipeline.products as products
 import pipeline.jsonld as jsonld
 import shutil
 
+import threading
+import time
+import sys
+
+
 def execute(*transformations):
     for t in transformations:
         print(t.description())
+        clock = make_clock_thread()
+        clock.start()
         t.run()
+        clock.stopped = True
+        clock.join()
+
+
+def make_clock_thread():
+
+    class Clock(threading.Thread):
+
+        def __init__(self):
+            threading.Thread.__init__(self)
+            self.stopped = False
+
+        def run(self):
+            i = 0
+            while not self.stopped:
+                time.sleep(0.1)
+                clock = ['|', '/', '-', '\\']
+                c = i % 4
+                if c == 0:
+                    i = 1
+                sys.stdout.write("\r%s" % clock[c])
+                sys.stdout.flush()
+                sys.stdout.write("\r")
+                sys.stdout.flush()
+                i += 1
+
+    return Clock()
 
 
 class Bea2002MakeTransformation:

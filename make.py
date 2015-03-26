@@ -1,4 +1,5 @@
 import pipeline as pipe
+import os
 
 if __name__ == '__main__':
 
@@ -17,6 +18,9 @@ if __name__ == '__main__':
     tech = out_dir + 'tech.csv'
     products = out_dir + 'products.csv'
     package = out_dir + 'iodb.zip'
+
+    if not os.path.isdir(out_dir):
+        os.makedirs(out_dir)
 
     pipe.execute(
         pipe.Bea2002MakeTransformation.of(bea_make).to(make),
