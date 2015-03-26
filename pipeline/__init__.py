@@ -1,7 +1,8 @@
 import pipeline.bea2002 as bea
 import pipeline.dr as dr
 import pipeline.products as products
-
+import pipeline.jsonld as jsonld
+import shutil
 
 def execute(*transformations):
     for t in transformations:
@@ -17,7 +18,7 @@ class Bea2002MakeTransformation:
         pass
 
     @classmethod
-    def on(cls, bea_makefile):
+    def of(cls, bea_makefile):
         return Bea2002MakeTransformation(bea_makefile, None)
 
     def to(self, csv_output_file):
@@ -38,6 +39,14 @@ class Bea2002UseTransformation:
         self.bea_use = bea_use_file
         self.csv_use = csv_output_file
 
+    @classmethod
+    def of(cls, bea_use_file):
+        return Bea2002UseTransformation(bea_use_file, None)
+
+    def to(self, csv_output_file):
+        self.csv_use = csv_output_file
+        return self
+
     def description(self):
         return "convert BEA 2002 use matrix %s to CSV matrix %s" % (
             self.bea_use, self.csv_use)
@@ -53,6 +62,14 @@ class TechMatrixTransformation:
         self.use_csv = use_csv_file
         self.dr_csv = dr_csv_file
 
+    @classmethod
+    def of(cls, make_csv_file, use_csv_file):
+        return TechMatrixTransformation(make_csv_file, use_csv_file, None)
+
+    def to(self, dr_csv_file):
+        self.dr_csv = dr_csv_file
+        return self
+
     def description(self):
         return "calculate the DR coefficient matrix %s from %s and %s" % (
             self.dr_csv, self.make_csv, self.use_csv)
@@ -64,12 +81,20 @@ class TechMatrixTransformation:
         dr_matrix.write_sparse_csv(self.dr_csv)
 
 
-class ProductExtractor:
+class ProductExtraction:
 
     def __init__(self, tech_csv_file, category_json_file, out_csv_file):
         self.tech_csv = tech_csv_file
         self.cat_json = category_json_file
         self.out_csv = out_csv_file
+
+    @classmethod
+    def of(cls, tech_csv_file, category_json_file):
+        return ProductExtraction(tech_csv_file, category_json_file, None)
+
+    def to(self, out_csv_file):
+        self.out_csv = out_csv_file
+        return self
 
     def description(self):
         return "extract product/sector information from %s to %s" % (
@@ -77,3 +102,50 @@ class ProductExtractor:
 
     def run(self):
         products.make_product_table(self.tech_csv, self.cat_json, self.out_csv)
+
+
+class Copy:
+
+    def __init__(self, from_file, to_file):
+        self.from_file = from_file
+        self.to_file = to_file
+
+    @classmethod
+    def of(cls, from_file):
+        return Copy(from_file, None)
+
+    def to(self, to_file):
+        self.to_file = to_file
+        return self
+
+    def description(self):
+        return "copy %s to %s" % (self.from_file, self.to_file)
+
+    def run(self):
+        shutil.copy(self.from_file, self.to_file)
+
+
+class JsonTransformation:
+
+    def __init__(self, tech_csv, products_csv, sat_csv, flows_csv, package_zip):
+        self.tech_csv = tech_csv
+        self.products_csv = products_csv
+        self.sat_csv = sat_csv
+        self.flows_csv = flows_csv
+        self.package_zip = package_zip
+
+    @classmethod
+    def of(cls, tech_csv, products_csv, sat_csv, flows_csv):
+        return JsonTransformation(tech_csv, products_csv, sat_csv, flows_csv,
+                                  None)
+
+    def to(self, package_zip):
+        self.package_zip = package_zip
+        return self
+
+    def description(self):
+        return "create JSON-LD package %s" % self.package_zip
+
+    def run(self):
+        jsonld.make_package(self.tech_csv, self.products_csv, self.sat_csv,
+                            self.flows_csv, self.package_zip)

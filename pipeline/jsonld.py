@@ -20,7 +20,7 @@ def make_package(tech_csv, product_csv, sat_csv, flows_csv, zip_path):
             sat_entries = _get_sat_entries(row[0], sat_csv)
             add_sat_entries(sat_entries, flow_infos, p)
             path = "processes/%s.json" % uid
-            print("write process %s" % path)
+            # print("write process %s" % path)
             pack.writestr(path, json.dumps(p))
 
 
@@ -241,13 +241,5 @@ def _write_economic_units(pack):
     pack.writestr("flow_properties/b0682037-e878-4be4-a63a-a7a81053a691.json",
                   fp)
 
-
-if __name__ == '__main__':
-    shutil.copy("../data/iodb_ref_flows_wri.zip", "../build/package.zip")
-    make_package("../build/dr_coefficients.csv",
-                 "../build/products.csv",
-                 "../data/satellite_matrix_olca_ref_flows_wri.csv",
-                 "../data/olca_ref_flow_infos_wri.csv",
-                 '../build/package.zip')
 
 
