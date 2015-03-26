@@ -243,11 +243,11 @@ def _write_economic_units(pack):
 
 
 if __name__ == '__main__':
-    shutil.copy("../data/iodb_ref_flows.zip", "../build/package.zip")
+    shutil.copy("../data/iodb_ref_flows_wri.zip", "../build/package.zip")
     make_package("../build/dr_coefficients.csv",
                  "../build/products.csv",
-                 "../data/open-io/satellite_matrix_olca_ref_flows.csv",
-                 "../data/open-io/olca_ref_flow_infos.csv",
+                 "../data/satellite_matrix_olca_ref_flows_wri.csv",
+                 "../data/olca_ref_flow_infos_wri.csv",
                  '../build/package.zip')
 
 

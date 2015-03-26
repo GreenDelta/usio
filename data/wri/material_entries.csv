@@ -81,16 +81,16 @@
 "221200 - Natural gas distribution","Butane",15568.0
 "221200 - Natural gas distribution","Natural gas (Methane)",448674.9594522561
 "221200 - Natural gas distribution","Propane",20815.840848723903
-"230101.0 - Nonresidential commercial and health care structures","Earth moving",463860.91431083984
-"230102.0 - Nonresidential manufacturing structures","Earth moving",54788.6172105197
-"230103.0 - Other nonresidential structures","Earth moving",1965626.347661761
-"230201.0 - Residential permanent site single- and multi-family structures","Earth moving",1490577.2919761
-"230202.0 - Other residential structures","Earth moving",15804.8288407802
-"321100.0 - Sawmills and wood preservation","Lumber",78450.0127934111
-"321219.0 - Reconstituted wood product manufacturing","Wood Panels",17427.78731026387
+"230101 - Nonresidential commercial and health care structures","Earth moving",463860.91431083984
+"230102 - Nonresidential manufacturing structures","Earth moving",54788.6172105197
+"230103 - Other nonresidential structures","Earth moving",1965626.347661761
+"230201 - Residential permanent site single- and multi-family structures","Earth moving",1490577.2919761
+"230202 - Other residential structures","Earth moving",15804.8288407802
+"321100 - Sawmills and wood preservation","Lumber",78450.0127934111
+"321219 - Reconstituted wood product manufacturing","Wood Panels",17427.78731026387
 "32121A - Veneer and plywood manufacturing","Plywood & Laminated Veneer Lumber (LVL)",12907.27
-"321999.0 - All other miscellaneous wood product manufacturing","Lumber",475.447206588881
-"322110.0 - Pulp mills","Paper & Board",95716.77
+"321999 - All other miscellaneous wood product manufacturing","Lumber",475.447206588881
+"322110 - Pulp mills","Paper & Board",95716.77
 "324110 - Petroleum refineries","Distillate Fuel Oil",184360.97578319997
 "324110 - Petroleum refineries","Jet Fuel",77957.2839506173
 "324110 - Petroleum refineries","Kerosene",3190.9443723000004
