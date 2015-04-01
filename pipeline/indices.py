@@ -14,6 +14,16 @@ def extract(csv_make_table, csv_use_table, commodity_file, industry_file):
             f.write(i + '\n')
 
 
+def read(index_file):
+    index = []
+    with open(index_file, 'r', newline='\n') as f:
+        for i in f:
+            if i not in index:
+                index.append(i.strip())
+    index.sort()
+    return index
+
+
 def combine(collection1, collection2):
     c = []
     for e1 in collection1:
@@ -41,12 +51,3 @@ def write_diff(list1, list2):
         elif e in list2:
             print('- %s %s' % ('-'.ljust(word_len), e.ljust(word_len)))
 
-
-
-if __name__ == '__main__':
-    d = '../build/pipeline/'
-    extract(d + 'make.csv', d + 'use.csv', d + 'commodities.csv',
-            d + 'industries.csv')
-    #make = matrix.read_sparse_csv(folder + 'make.csv')
-    #use = matrix.read_sparse_csv(folder + 'use.csv')
-    #write_diff(make.row_keys, use.col_keys)
