@@ -42,8 +42,6 @@ class Matrix:
         if value is None:
             return 0
         v = float(value)
-        if v == 0:
-            return 0
         row = self.add_row(row_key)
         col = self.add_col(col_key)
         if not row in self.values:

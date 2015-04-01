@@ -25,10 +25,9 @@ def use_to_csv(bea_use, csv_use):
             ind_code = row['Industry']
             ind_name = row['IndustryDescription']
             val = float(row['ProVal'])
-            if val != 0:
-                row_key = "%s - %s" % (com_code, com_name)
-                col_key = "%s - %s" % (ind_code, ind_name)
-                writer.writerow([row_key, col_key, val])
+            row_key = "%s - %s" % (com_code, com_name)
+            col_key = "%s - %s" % (ind_code, ind_name)
+            writer.writerow([row_key, col_key, val])
 
 
 def _get_use_rows(bea_use):
@@ -96,8 +95,6 @@ def make_to_csv(bea_make, csv_make):
             com_code = row[2]
             com_name = row[3]
             v = float(row[4])
-            if v == 0:
-                continue
             row_key = "%s - %s" % (ind_code, ind_name)
             col_key = "%s - %s" % (com_code, com_name)
             writer.writerow([row_key, col_key, v])

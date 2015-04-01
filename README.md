@@ -1,10 +1,32 @@
 iodb
 ====
-This project provides modules and scripts for creating an environmental input
-output database based on the OpenIO framework. The data that are produced by
-this project can be directly used in LCA software tools like openLCA and 
-SimaPro. The project contains a command line tool `iodb` with which the 
-respective artifacts can be created from the raw data in the `data` folder. 
+This project provides scripts creating a US input-output database directly from 
+the [BEA statistics](http://www.bea.gov/industry/io_benchmark.htm). It creates
+a direct requirement matrix from the BEA make and use tables. This DR matrix is 
+than combined with a satellite matrix and converted to a set of process dates 
+sets in the [olca-schema](https://github.com/GreenDelta/olca-schema) which can
+be imported into [openLCA](http://www.openlca.org/). The satellite matrix is 
+based on the satellite matrix of the OpenIO database but was mapped to the flows 
+of the openLCA reference list.
+
+
+The CSV matrix format of the make and use tables
+------------------------------------------------
+The raw make and use tables are first converted into a CSV file format which
+describes a matrix with 3 columns: row-label, column-label, value. The labels
+are strings that uniquely identify a sector. In the use table commodities are
+listed in the rows (1. column of the CSV file) and industries are listed in the
+columns (2. column of the CSV file). In the make table it is the other way 
+around: industries are listed in the rows (1. column of the CSV file) and 
+commodities in the columns (2. column of the CSV file).
+
+The `iodb.csvmatrix` module helps to read and write such CSV matrix files:
+
+    import iodb.csvmatrix as csvm
+    
+    matrix = csvm.read_sparse(path_to_csv_file)
+    ...
+
 
 Running the tool
 ----------------
@@ -75,6 +97,12 @@ Data sources
 ------------
 * [BEA 2002 benchmark files](http://www.bea.gov/industry/io_benchmark.htm)
 * ...
+
+Module dependencies
+-------------------
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
+
+
 
 License
 -------

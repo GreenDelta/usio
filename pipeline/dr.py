@@ -1,5 +1,5 @@
-import pipeline.matrix
-from pipeline.matrix import Matrix
+import pipeline.csvmatrix
+from pipeline.csvmatrix import Matrix
 
 
 def read_sparse_matrix(file_path):
