@@ -12,6 +12,18 @@ def create_dr(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
     use = create_array_matrix(use_csv, com_idx, ind_idx)
     divide_by_col_sums(make)
     divide_by_col_sums(use)
+
+    # remove value added sectors
+    removals = []
+    for va in value_added:
+        i = com_idx.index(va)
+        if i > 0:
+            com_idx.remove(va)
+            removals.append(i)
+    if len(removals) > 0:
+        use = numpy.delete(use, removals, 0)
+        make = numpy.delete(make, removals, 1)
+
     dr = numpy.dot(use, make)
     csv_dr = create_csv_matrix(dr, com_idx, com_idx)
     csv_dr.write_sparse_csv(dr_csv_file)
@@ -76,19 +88,30 @@ def create_csv_matrix(array_matrix, row_index, col_index):
 
 class Index:
     def __init__(self):
-        self.key_to_index = {}
-        self.index_to_key = {}
+        self.keys = []
+        self.idx = {}
 
     def size(self):
-        return len(self.key_to_index)
+        return len(self.keys)
 
     def add(self, key):
-        idx = len(self.key_to_index)
-        self.key_to_index[key] = idx
-        self.index_to_key[idx] = key
+        i = len(self.keys)
+        self.keys.append(key)
+        self.idx[key] = i
+
+    def remove(self, key):
+        if key not in self.keys:
+            return
+        i = self.idx[key]
+        self.keys.remove(key)
+        for j in range(i, len(self.keys)):
+            old = self.idx[self.keys[i]]
+            self.idx[self.keys[i]] = old - 1
 
     def index(self, key):
-        return self.key_to_index[key]
+        if key not in self.idx:
+            return -1
+        return self.idx[key]
 
     def key(self, idx):
-        return self.index_to_key[idx]
+        return self.keys[idx]
