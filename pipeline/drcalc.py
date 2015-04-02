@@ -35,12 +35,15 @@ def create_csv_matrix(array_matrix, row_index, col_index):
     rows, cols = array_matrix.shape
     csv_matrix = csvm.Matrix()
     for row in range(0, rows):
+        row_key = row_index.key(row)
+        csv_matrix.add_row(row_key)
         for col in range(0, cols):
+            col_key = col_index.key(col)
+            if col == 0:
+                csv_matrix.add_col(col_key)
             val = array_matrix[row, col]
             if val == 0:
                 continue
-            row_key = row_index.key(row)
-            col_key = col_index.key(col)
             csv_matrix.add_entry(row_key, col_key, val)
     return csv_matrix
 
