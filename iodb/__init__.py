@@ -1,73 +1,26 @@
-import iodb.matrix
-from iodb.matrix import Matrix
+import iodb.csvmatrix as csv
+import iodb.dr as dr
 
 
-def read_sparse_matrix(file_path):
-    return iodb.matrix.read_sparse_csv(file_path)
+def read_csv_matrix(file_path):
+    return csv.read_sparse_csv(file_path)
 
 
-def calculate_dr_coefficients(use_table, make_table):
+def create_dr_matrix(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
+                     value_added=[]):
     """
-    Calculates the direct requirement coefficients from the given use table and
-    make table.
+    Creates a direct requirement matrix from the given use and make tables and
+    writes the result into a CSV file.
 
-    TODO: there is currently no option for scrap adjustments included.
-
-    :param use_table: The use table as commodity-by-industry matrix.
-    :type use_table: Matrix
-    :param make_table: The make table as industry-by-commodity matrix.
-    :type make_table: Matrix
-    :return: A commodity-by-commodity matrix with the direct requirement
-             coefficients.
+    :param use_csv_file: The path to a CSV matrix file of the use table.
+    :param make_csv_file: The path to a CSV matrix file of the make table.
+    :param dr_csv_file: The path to the file to which the direct requirement
+    matrix should be written.
+    :param scrap: An optional identifier of the scrap sector for scrap
+    adjustments.
+    :param value_added: An optional list of value added sectors that should be
+    removed.
     """
-    commodities = use_table.row_keys
-    industries_use = use_table.col_keys
-    industries_make = make_table.row_keys
-    industries = []
-    for ind in industries_use:
-        if ind in industries_make:
-            industries.append(ind)
-    dr_table = calculate_dr_table(use_table)
-    share_table = calculate_market_shares(make_table)
-    dr_table = dr_table.filter(commodities, industries)
-    share_table = share_table.filter(industries, commodities)
-    return dr_table.mult(share_table)
+    dr.create_dr(make_csv_file, use_csv_file, dr_csv_file, scrap, value_added)
 
 
-def calculate_dr_table(use_table):
-    """
-    Calculates the direct requirement table from the given use table.
-
-    :param use_table: The use table as commodity-by-industry matrix.
-    :type use_table: Matrix
-    :return: The direct requirement table as commodity-by-industry matrix
-    """
-    totals = use_table.get_col_sums()
-    requirements = Matrix()
-    for entry in use_table.entries():
-        commodity = entry[0]
-        industry = entry[1]
-        total = totals[industry]
-        dr = entry[2] / total
-        requirements.add_entry(commodity, industry, dr)
-    return requirements
-
-
-def calculate_market_shares(make_table):
-    """
-    Calculates a matrix that contains the market shares from the given make
-    table.
-
-    :param make_table: The make table as industry-by-commodity matrix.
-    :type make_table: Matrix
-    :return: The market shares as industry-by-commodity matrix.
-    """
-    totals = make_table.get_col_sums()
-    shares = Matrix()
-    for entry in make_table.entries():
-        industry = entry[0]
-        commodity = entry[1]
-        total = totals[commodity]
-        share = entry[2] / total
-        shares.add_entry(industry, commodity, share)
-    return shares

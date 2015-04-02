@@ -42,8 +42,6 @@ class Matrix:
         if value is None:
             return 0
         v = float(value)
-        if v == 0:
-            return 0
         row = self.add_row(row_key)
         col = self.add_col(col_key)
         if not row in self.values:
@@ -132,7 +130,7 @@ class Matrix:
                 m.add_entry(row_key, col_key, entry[2])
         return m
 
-    def write_dense_csv(self, file_path):
+    def write_dense_csv(self, file_path, delimiter=','):
         row_keys = []
         row_keys.extend(self.row_keys)
         row_keys.sort()
@@ -140,7 +138,8 @@ class Matrix:
         col_keys.extend(self.col_keys)
         col_keys.sort()
         with open(file_path, 'w', newline='\n') as f:
-            writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
+            writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC,
+                                delimiter=delimiter)
             headers = ['']
             headers.extend(col_keys)
             writer.writerow(headers)

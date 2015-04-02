@@ -10,8 +10,26 @@ based on the satellite matrix of the OpenIO database but was mapped to the flows
 of the openLCA reference list.
 
 
-The CSV matrix format of the make and use tables
-------------------------------------------------
+The CSV matrix format
+---------------------
+The data processing is based on matrices that are stored in a simple CSV file
+format which describes the content of a matrix with 3 columns: a row identifier
+(a string), a column identifier (a string), the value of the respective row
+and column (a number). Here is an example of how the content of such a file may
+look like:
+
+    "A","A",300
+    "A","B",25
+    "A","Scrap",3
+    "B","A",30
+    "B","B",360
+    "B","C",20
+    "B","Scrap",2
+    "C","B",15
+    "C","C",250
+
+
+
 The raw make and use tables are first converted into a CSV file format which
 describes a matrix with 3 columns: row-label, column-label, value. The labels
 are strings that uniquely identify a sector. In the use table commodities are
