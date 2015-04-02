@@ -2,14 +2,25 @@ import iodb.csvmatrix as csv
 import numpy
 
 
-def create_dr(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
-              value_added=[]):
+def create_drc(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
+               value_added=[]):
+
+    # initialize the matrices
     make_csv = csv.read_sparse_csv(make_csv_file)
     use_csv = csv.read_sparse_csv(use_csv_file)
     com_idx = create_combined_index(make_csv.col_keys, use_csv.row_keys)
     ind_idx = create_combined_index(make_csv.row_keys, use_csv.col_keys)
     make = create_array_matrix(make_csv, ind_idx, com_idx)
     use = create_array_matrix(use_csv, com_idx, ind_idx)
+
+    # calculate non-scrap rations
+    non_scrap_ratios = None
+    if scrap is not None:
+        scrap_idx = com_idx.index(scrap)
+        if scrap_idx >= 0:
+            non_scrap_ratios = calculate_non_scrap_ratios(make, scrap_idx)
+
+    # calculate market shares and direct requirements
     divide_by_col_sums(make)
     divide_by_col_sums(use)
 
@@ -17,16 +28,55 @@ def create_dr(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
     removals = []
     for va in value_added:
         i = com_idx.index(va)
-        if i > 0:
+        if i >= 0:
             com_idx.remove(va)
             removals.append(i)
     if len(removals) > 0:
-        use = numpy.delete(use, removals, 0)
-        make = numpy.delete(make, removals, 1)
+        use = numpy.delete(use, removals, 0)  # delete rows
+        make = numpy.delete(make, removals, 1)  # delete columns
 
+    # scrap adjustments
+    if non_scrap_ratios is not None:
+        apply_non_scrap_ratios(make, non_scrap_ratios)
+        scrap_idx = com_idx.index(scrap)
+        com_idx.remove(scrap)
+        use = numpy.delete(use, scrap_idx, 0)
+        make = numpy.delete(make, scrap_idx, 1)
+
+    # calculate and write the direct requirement coefficients
     dr = numpy.dot(use, make)
     csv_dr = create_csv_matrix(dr, com_idx, com_idx)
     csv_dr.write_sparse_csv(dr_csv_file)
+
+
+def apply_non_scrap_ratios(market_shares, non_scrap_ratios):
+    rows, cols = market_shares.shape
+    for row in range(0, rows):
+        ratio = non_scrap_ratios[row]
+        if ratio == 0:
+            continue
+        for col in range(0, cols):
+            market_shares[row, col] = market_shares[row, col] / ratio
+
+
+def calculate_non_scrap_ratios(make, scrap_idx):
+    rows, cols = make.shape
+    totals = numpy.zeros(rows)
+    non_scrap_totals = numpy.zeros(rows)
+    for row in range(0, rows):
+        total = 0
+        non_scrap_total = 0
+        for col in range(0, cols):
+            val = make[row, col]
+            total += val
+            if col != scrap_idx:
+                non_scrap_total += val
+        totals[row] = total
+        non_scrap_totals[row] = non_scrap_total
+    for row in range(0, rows):
+        if totals[row] != 0:
+            totals[row] = non_scrap_totals[row] / totals[row]
+    return totals
 
 
 def create_array_matrix(csv_matrix, row_index, col_index):

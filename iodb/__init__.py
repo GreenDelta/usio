@@ -1,16 +1,16 @@
 import iodb.csvmatrix as csv
-import iodb.dr as dr
+import iodb.drc as drc
 
 
 def read_csv_matrix(file_path):
     return csv.read_sparse_csv(file_path)
 
 
-def create_dr_matrix(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
-                     value_added=[]):
+def create_drc_matrix(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
+                      value_added=[]):
     """
-    Creates a direct requirement matrix from the given use and make tables and
-    writes the result into a CSV file.
+    Creates a direct requirement coefficient matrix from the given use and make
+    tables and writes the result into a CSV file.
 
     :param use_csv_file: The path to a CSV matrix file of the use table.
     :param make_csv_file: The path to a CSV matrix file of the make table.
@@ -21,6 +21,6 @@ def create_dr_matrix(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
     :param value_added: An optional list of value added sectors that should be
     removed.
     """
-    dr.create_dr(make_csv_file, use_csv_file, dr_csv_file, scrap, value_added)
+    drc.create_drc(make_csv_file, use_csv_file, dr_csv_file, scrap, value_added)
 
 

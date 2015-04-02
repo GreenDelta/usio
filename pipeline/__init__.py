@@ -109,7 +109,7 @@ class TechMatrixTransformation:
             self.dr_csv, self.make_csv, self.use_csv)
 
     def run(self):
-        iodb.create_dr_matrix(self.make_csv, self.use_csv, self.dr_csv)
+        iodb.create_drc_matrix(self.make_csv, self.use_csv, self.dr_csv)
 
 
 class ProductExtraction:
