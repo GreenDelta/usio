@@ -1,5 +1,5 @@
+import iodb
 import pipeline.bea2002 as bea
-import pipeline.dr as dr
 import pipeline.products as products
 import pipeline.jsonld as jsonld
 import shutil
@@ -109,10 +109,7 @@ class TechMatrixTransformation:
             self.dr_csv, self.make_csv, self.use_csv)
 
     def run(self):
-        make_table = dr.read_sparse_matrix(self.make_csv)
-        use_table = dr.read_sparse_matrix(self.use_csv)
-        dr_matrix = dr.calculate_dr_coefficients(use_table, make_table)
-        dr_matrix.write_sparse_csv(self.dr_csv)
+        iodb.create_dr_matrix(self.make_csv, self.use_csv, self.dr_csv)
 
 
 class ProductExtraction:

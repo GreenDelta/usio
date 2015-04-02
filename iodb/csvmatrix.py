@@ -159,7 +159,7 @@ class Matrix:
             for row in row_keys:
                 for col in col_keys:
                     val = self.get_entry(row, col)
-                    if val == 0:
+                    if val == 0 or val is None:
                         continue
                     writer.writerow([row, col, val])
 

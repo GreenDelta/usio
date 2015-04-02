@@ -25,8 +25,8 @@ if __name__ == '__main__':
     pipe.execute(
         pipe.Bea2002MakeTransformation.of(bea_make).to(make),
         pipe.Bea2002UseTransformation.of(bea_use).to(use),
-        #pipe.TechMatrixTransformation.of(make, use).to(tech),
-        #pipe.ProductExtraction.of(tech, categories).to(products),
-        #pipe.Copy.of(package_template).to(package),
-        #pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
+        pipe.TechMatrixTransformation.of(make, use).to(tech),
+        pipe.ProductExtraction.of(tech, categories).to(products),
+        pipe.Copy.of(package_template).to(package),
+        pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
     )
