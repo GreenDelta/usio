@@ -1,5 +1,5 @@
 import iodb.csvmatrix as csv
-import iodb.drc as drc
+import iodb.req as req
 
 
 def read_csv_matrix(file_path):
@@ -21,6 +21,17 @@ def create_drc_matrix(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
     :param value_added: An optional list of value added sectors that should be
     removed.
     """
-    drc.create_drc(make_csv_file, use_csv_file, dr_csv_file, scrap, value_added)
+    req.create_drc(make_csv_file, use_csv_file, dr_csv_file, scrap, value_added)
 
 
+def create_tr_matrix(drc_csv_file, tr_csv_file):
+    """
+    Creates a total requirements matrix from the given direct requirements
+    coefficient matrix and writes the result into a CSV file.
+
+    :param drc_csv_file: The path to a CSV matrix file that contains the
+    direct requirements coefficient matrix.
+    :param tr_csv_file: The path to the CSV file where the resulting total
+    requirements matrix should be written.
+    """
+    req.create_tr(drc_csv_file, tr_csv_file)

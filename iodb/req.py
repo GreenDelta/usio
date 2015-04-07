@@ -1,5 +1,24 @@
 import iodb.csvmatrix as csv
 import numpy
+from numpy.linalg import inv
+
+
+def create_tr(drc_csv_file, tr_csv_file):
+    drc_csv = csv.read_sparse_csv(drc_csv_file)
+    idx = Index()
+    for key in drc_csv.row_keys:
+        if not idx.contains_key(key):
+            idx.add(key)
+    for key in drc_csv.col_keys:
+        if not idx.contains_key(key):
+            idx.add(key)
+    drc = create_array_matrix(drc_csv, idx, idx)
+    dim = idx.size()
+    eye = numpy.eye(dim, dim)
+    m = numpy.subtract(eye, drc)
+    tr = inv(m)
+    tr_csv = create_csv_matrix(tr, idx, idx)
+    tr_csv.write_sparse_csv(tr_csv_file)
 
 
 def create_drc(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
@@ -165,3 +184,6 @@ class Index:
 
     def key(self, idx):
         return self.keys[idx]
+
+    def contains_key(self, key):
+        return self.index(key) >= 0

@@ -29,6 +29,16 @@ look like:
     "C","C",250
 
 
+Creating the requirements tables
+--------------------------------
+The requirements tables are created as described in 
+[Concepts and Methods of the U.S. Input-Output Accounts][1] (see Chapter 12).  
+
+
+[1]:http://www.bea.gov/papers/pdf/IOmanual_092906.pdf "Karen J. Horowitz, Mark A. Planting: Concepts and Methods of the U.S. Input-Output Accounts. 2006"
+
+
+
 
 The raw make and use tables are first converted into a CSV file format which
 describes a matrix with 3 columns: row-label, column-label, value. The labels
