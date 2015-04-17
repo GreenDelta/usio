@@ -91,14 +91,18 @@ class Bea2002UseTransformation:
 
 class TechMatrixTransformation:
 
-    def __init__(self, make_csv_file, use_csv_file, dr_csv_file):
+    def __init__(self, make_csv_file, use_csv_file, dr_csv_file, scrap=None,
+                 value_added=[]):
         self.make_csv = make_csv_file
         self.use_csv = use_csv_file
         self.dr_csv = dr_csv_file
+        self.scrap = scrap
+        self.value_added = value_added
 
     @classmethod
-    def of(cls, make_csv_file, use_csv_file):
-        return TechMatrixTransformation(make_csv_file, use_csv_file, None)
+    def of(cls, make_csv_file, use_csv_file, scrap=None, value_added=[]):
+        return TechMatrixTransformation(make_csv_file, use_csv_file, None,
+                                        scrap=scrap, value_added=value_added)
 
     def to(self, dr_csv_file):
         self.dr_csv = dr_csv_file
@@ -109,7 +113,8 @@ class TechMatrixTransformation:
             self.dr_csv, self.make_csv, self.use_csv)
 
     def run(self):
-        iodb.create_drc_matrix(self.make_csv, self.use_csv, self.dr_csv)
+        iodb.create_drc_matrix(self.make_csv, self.use_csv, self.dr_csv,
+                               scrap=self.scrap, value_added=self.value_added)
 
 
 class ProductExtraction:

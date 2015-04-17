@@ -1,14 +1,21 @@
-iodb
+usio
 ====
-This project provides scripts creating a US input-output database directly from 
-the [BEA statistics](http://www.bea.gov/industry/io_benchmark.htm). It creates
-a direct requirement matrix from the BEA make and use tables. This DR matrix is 
-than combined with a satellite matrix and converted to a set of process dates 
-sets in the [olca-schema](https://github.com/GreenDelta/olca-schema) which can
-be imported into [openLCA](http://www.openlca.org/). The satellite matrix is 
-based on the satellite matrix of the OpenIO database but was mapped to the flows 
-of the openLCA reference list.
+This project provides scripts for creating a US input-output database directly 
+from the [BEA statistics](http://www.bea.gov/industry/io_benchmark.htm). It 
+creates a direct requirement matrix from the BEA make and use tables. This DR 
+matrix is than combined with a satellite matrix and converted to a set of 
+process dates sets in the [olca-schema](https://github.com/GreenDelta/olca-schema) 
+which can be imported into [openLCA](http://www.openlca.org/). The satellite 
+matrix is based on the satellite matrix of the OpenIO database but was mapped 
+to the flows of the openLCA reference list.
 
+
+Usage
+=====
+To create a data package based on the [BEA 2002 input output tables](http://www.bea.gov/industry/io_benchmark.htm)
+just run the make.py script. You need to have Python 3.x and [NumPy](http://www.numpy.org/) 
+installed (for Windows you can find NumPy binaries here: 
+http://www.lfd.uci.edu/~gohlke/pythonlibs/). 
 
 The CSV matrix format
 ---------------------
@@ -32,7 +39,25 @@ look like:
 Creating the requirements tables
 --------------------------------
 The requirements tables are created as described in 
-[Concepts and Methods of the U.S. Input-Output Accounts][1] (see Chapter 12).  
+[Concepts and Methods of the U.S. Input-Output Accounts][1] (see Chapter 12). 
+The `iodb` module currently contains a function for creating a direct 
+requirements coefficient matrix from raw use and make tables in the CSV matrix
+format as described above:
+
+    import iodb    
+    iodb.create_drc_matrix(make_csv_file, use_csv_file, dr_csv_file)
+    
+This function optionally takes a name of a sector for scrap adjustments and a
+list of value added sectors:
+
+    iodb.create_drc_matrix(make_csv_file, use_csv_file, drc_csv_file, 
+                           scrap='Scrap', value_added=['VA1', 'VA2'])
+                           
+As a result of this function call the direct requirements coefficients are 
+written to the `drc_csv_file`. This file can then be used to calculate the
+total requirement table:
+
+
 
 
 [1]:http://www.bea.gov/papers/pdf/IOmanual_092906.pdf "Karen J. Horowitz, Mark A. Planting: Concepts and Methods of the U.S. Input-Output Accounts. 2006"
@@ -125,11 +150,6 @@ Data sources
 ------------
 * [BEA 2002 benchmark files](http://www.bea.gov/industry/io_benchmark.htm)
 * ...
-
-Module dependencies
--------------------
-http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
-
 
 
 License

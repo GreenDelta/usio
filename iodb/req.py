@@ -32,7 +32,7 @@ def create_drc(make_csv_file, use_csv_file, dr_csv_file, scrap=None,
     make = create_array_matrix(make_csv, ind_idx, com_idx)
     use = create_array_matrix(use_csv, com_idx, ind_idx)
 
-    # calculate non-scrap rations
+    # calculate non-scrap ratios
     non_scrap_ratios = None
     if scrap is not None:
         scrap_idx = com_idx.index(scrap)

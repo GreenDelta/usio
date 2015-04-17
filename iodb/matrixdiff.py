@@ -1,11 +1,9 @@
 import iodb
 
 
-def create_report(matrix_a, matrix_b, report_file, epsilon=0.0000001):
-    """
-    :type matrix_a: iodb.matrix.Matrix
-    :type matrix_b: iodb.matrix.Matrix
-    """
+def create_report(matrix_a_csv, matrix_b_csv, report_file, epsilon=0.0000001):
+    matrix_a = iodb.read_csv_matrix(matrix_a_csv)
+    matrix_b = iodb.read_csv_matrix(matrix_b_csv)
     with open(report_file, 'w') as writer:
         row_keys = [r for r in matrix_a.row_keys]
         row_keys.sort()
@@ -34,10 +32,7 @@ def _write_cells(row_keys, col_keys, matrix_a, matrix_b, writer, epsilon):
         for col_key in col_keys:
             val_a = matrix_a.get_entry(row_key, col_key)
             val_b = matrix_b.get_entry(row_key, col_key)
-            if abs(val_a) < epsilon and abs(val_b) < epsilon:
-                col += 1
-                continue
-            color = ('rgb(140,255,140)' if val_a - val_b < epsilon
+            color = ('rgb(140,255,140)' if abs(val_a - val_b) < epsilon
                      else 'rgb(255,140,140)')
             title = "%s :: %s :: a=%s b=%s" % (row_key, col_key, val_a, val_b)
             _write_rect(col * 5, row * 5, color, title, writer)

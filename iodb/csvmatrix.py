@@ -44,7 +44,7 @@ class Matrix:
         v = float(value)
         row = self.add_row(row_key)
         col = self.add_col(col_key)
-        if not row in self.values:
+        if row not in self.values:
             self.values[row] = {}
         self.values[row][col] = v
         return v
@@ -70,9 +70,12 @@ class Matrix:
         if r is None or c is None:
             return 0
         if r not in self.values:
-            return
+            return 0
         row_entries = self.values[r]
-        return row_entries[c] if c in row_entries else 0
+        if c not in row_entries:
+            return 0
+        val = row_entries[c]
+        return 0 if val is None else val
 
     def get_col_sums(self):
         sums = {}
@@ -156,12 +159,17 @@ class Matrix:
         col_keys.sort()
         with open(file_path, 'w', newline='\n') as f:
             writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
+            first_row = True  # write each row and column key at least once
             for row in row_keys:
+                first_col = True
                 for col in col_keys:
                     val = self.get_entry(row, col)
-                    if val == 0 or val is None:
+                    should_write = first_row or first_col
+                    if val == 0 and not should_write:
                         continue
                     writer.writerow([row, col, val])
+                    first_col = False
+                first_row = False
 
 
 def read_sparse_csv(file_path):

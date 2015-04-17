@@ -22,11 +22,20 @@ if __name__ == '__main__':
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
 
+    scrap = 'S00401 - Scrap'
+    value_added = [
+        'V00100 - Compensation of employees',
+        'V00200 - Taxes on production and imports, less subsidies',
+        'V00300 - Gross operating surplus'
+    ]
+
     pipe.execute(
         pipe.Bea2002MakeTransformation.of(bea_make).to(make),
         pipe.Bea2002UseTransformation.of(bea_use).to(use),
-        pipe.TechMatrixTransformation.of(make, use).to(tech),
+        pipe.TechMatrixTransformation.of(make, use, scrap=scrap,
+                                         value_added=value_added).to(tech),
         pipe.ProductExtraction.of(tech, categories).to(products),
         pipe.Copy.of(package_template).to(package),
         pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
     )
+
