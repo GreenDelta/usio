@@ -1,5 +1,5 @@
 import iodb
-import pipeline.bea2002 as bea
+import pipeline.bea2002csv as bea
 import pipeline.products as products
 import pipeline.jsonld as jsonld
 import shutil
@@ -64,7 +64,7 @@ class Bea2002MakeTransformation:
             self.bea_make, self.csv_make)
 
     def run(self):
-        bea.make_to_csv(self.bea_make, self.csv_make)
+        bea.convert_make_table(self.bea_make, self.csv_make)
 
 
 class Bea2002UseTransformation:
@@ -86,7 +86,7 @@ class Bea2002UseTransformation:
             self.bea_use, self.csv_use)
 
     def run(self):
-        bea.use_to_csv(self.bea_use, self.csv_use)
+        bea.convert_use_table(self.bea_use, self.csv_use)
 
 
 class TechMatrixTransformation:

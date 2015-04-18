@@ -1,5 +1,4 @@
-out/
-csv_out/
+archive/
 .idea/
 helpers/
 build/
