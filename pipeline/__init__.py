@@ -64,7 +64,7 @@ class Bea2002MakeTransformation:
             self.bea_make, self.csv_make)
 
     def run(self):
-        bea.convert_make_table(self.bea_make, self.csv_make)
+        bea.convert_table(self.bea_make, self.csv_make)
 
 
 class Bea2002UseTransformation:
@@ -86,7 +86,7 @@ class Bea2002UseTransformation:
             self.bea_use, self.csv_use)
 
     def run(self):
-        bea.convert_use_table(self.bea_use, self.csv_use)
+        bea.convert_table(self.bea_use, self.csv_use)
 
 
 class TechMatrixTransformation:
