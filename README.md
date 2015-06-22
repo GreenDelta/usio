@@ -80,3 +80,8 @@ look like:
     "B","Scrap",2
     "C","B",15
     "C","C",250
+
+This repository contains also a small tool for comparing two matrices in this 
+format. See the [diffexample.py script](scripts/diffexample.py) in the scripts
+folder for how to use this tool. Additionally, there is a Excel macro for
+converting matrices in Excel into this matrix format in the script folder.

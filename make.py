@@ -3,9 +3,9 @@ import os
 
 if __name__ == '__main__':
 
+    # prepare the output directory
     build_dir = 'build'
     pipe_dir = 'build/pipe'
-
     if not os.path.exists(pipe_dir):
         os.makedirs(pipe_dir)
 
