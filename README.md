@@ -1,21 +1,32 @@
 usio
 ====
-This project provides scripts for creating a US input-output database directly 
-from the [BEA statistics](http://www.bea.gov/industry/io_benchmark.htm). It 
-creates a direct requirement matrix from the BEA make and use tables. This DR 
-matrix is than combined with a satellite matrix and converted to a set of 
-process dates sets in the [olca-schema](https://github.com/GreenDelta/olca-schema) 
+This project provides scripts for creating an US input-output database for the
+use in [openLCA](http://www.openlca.org/). It creates a direct requirement 
+matrix from the [BEA make and use tables](http://www.bea.gov/industry/io_benchmark.htm). 
+This DR matrix is than combined with a satellite matrix and converted to a set of 
+process dates sets in the [olca-schema format](https://github.com/GreenDelta/olca-schema) 
 which can be imported into [openLCA](http://www.openlca.org/). The satellite 
 matrix is based on the satellite matrix of the OpenIO database but was mapped 
 to the flows of the openLCA reference list.
 
-
 Usage
-=====
+-----
+In order to build the database using the scripts this repository you need to 
+have Python 3.x and [NumPy](http://www.numpy.org/) installed (for Windows you 
+can find NumPy binaries here: http://www.lfd.uci.edu/~gohlke/pythonlibs/). If
+this is the case, just download this repository and run execute the `make.py` 
+script:
+
+    python make.py
+    
+This will create a usio\_[description].zip file in the build sup-directory.
+
+Data sources
+------------
+
 To create a data package based on the [BEA 2002 input output tables](http://www.bea.gov/industry/io_benchmark.htm)
 just run the make.py script. You need to have Python 3.x and [NumPy](http://www.numpy.org/) 
-installed (for Windows you can find NumPy binaries here: 
-http://www.lfd.uci.edu/~gohlke/pythonlibs/). 
+installed . 
 
 The CSV matrix format
 ---------------------

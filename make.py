@@ -6,6 +6,7 @@ if __name__ == '__main__':
     # input data sources
     bea_make = 'data/bea2002/redef/IOMakeDetail.txt'
     bea_use = 'data/bea2002/redef/IOUseDetail.txt'
+
     categories = 'data/naics_categories.json'
     package_template = 'data/iodb_ref_flows_wri.zip'
     sat = 'data/satellite_matrix_olca_ref_flows_wri.csv'
@@ -17,7 +18,6 @@ if __name__ == '__main__':
     use = out_dir + 'use.csv'
     tech = out_dir + 'tech.csv'
     products = out_dir + 'products.csv'
-    package = out_dir + 'iodb.zip'
 
     if not os.path.isdir(out_dir):
         os.makedirs(out_dir)
@@ -29,12 +29,45 @@ if __name__ == '__main__':
         'V00300 - Gross operating surplus'
     ]
 
+    # no redefinitions, no adjustments
+    package = out_dir + 'iodb_noredef.zip'
     pipe.execute(
         pipe.Bea2002MakeTransformation.of(bea_make).to(make),
         pipe.Bea2002UseTransformation.of(bea_use).to(use),
         pipe.TechMatrixTransformation.of(make, use).to(tech),
-        pipe.ProductExtraction.of(tech, categories).to(products)
-        #pipe.Copy.of(package_template).to(package),
-        #pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
+        pipe.ProductExtraction.of(tech, categories).to(products),
+        pipe.Copy.of(package_template).to(package),
+        pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
+    )
+
+    # no redefinitions, with adjustments
+    package = out_dir + 'iodb_noredef_adj.zip'
+    pipe.execute(
+        pipe.TechMatrixTransformation.of(make, use, scrap=scrap,
+                                         value_added=value_added).to(tech),
+        pipe.ProductExtraction.of(tech, categories).to(products),
+        pipe.Copy.of(package_template).to(package),
+        pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
+    )
+
+    # no redefinitions, no adjustments
+    package = out_dir + 'iodb_redef.zip'
+    pipe.execute(
+        pipe.Bea2002MakeTransformation.of(bea_make_redef).to(make),
+        pipe.Bea2002UseTransformation.of(bea_use_redef).to(use),
+        pipe.TechMatrixTransformation.of(make, use).to(tech),
+        pipe.ProductExtraction.of(tech, categories).to(products),
+        pipe.Copy.of(package_template).to(package),
+        pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
+    )
+
+    # no redefinitions, with adjustments
+    package = out_dir + 'iodb_redef_adj.zip'
+    pipe.execute(
+        pipe.TechMatrixTransformation.of(make, use, scrap=scrap,
+                                         value_added=value_added).to(tech),
+        pipe.ProductExtraction.of(tech, categories).to(products),
+        pipe.Copy.of(package_template).to(package),
+        pipe.JsonTransformation.of(tech, products, sat, flows).to(package)
     )
 
