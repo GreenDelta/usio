@@ -1,26 +1,27 @@
 usio
 ====
 This project provides scripts for creating an US input-output database for the
-use in [openLCA](http://www.openlca.org/). It creates a direct requirement 
+use in [openLCA](http://www.openlca.org/). It creates a direct requirements 
 matrix from the [BEA make and use tables](http://www.bea.gov/industry/io_benchmark.htm). 
 This DR matrix is than combined with a satellite matrix and converted to a set of 
 process dates sets in the [olca-schema format](https://github.com/GreenDelta/olca-schema) 
-which can be imported into [openLCA](http://www.openlca.org/). The satellite 
-matrix is based on the satellite matrix of the OpenIO database but was mapped 
-to the flows of the openLCA reference list.
+which can be imported into openLCA. The satellite matrix is based on the 
+satellite matrix of the OpenIO database but was mapped to the flows of the 
+openLCA reference list.
 
+![matrix-diff example](diff_example.png)
 
 Usage
 -----
-In order to build the database using the scripts this repository you need to 
+In order to build the database using the scripts in this repository you need to 
 have Python 3.x and [NumPy](http://www.numpy.org/) installed (for Windows you 
 can find NumPy binaries here: http://www.lfd.uci.edu/~gohlke/pythonlibs/). If
-this is the case, just download this repository and run execute the `make.py` 
+this is the case, just download this repository and execute the `make.py` 
 script:
 
     python make.py
     
-This will create a usio\_[description].zip file in the build sup-directory.
+This will create a usio\_[description].zip file in the `build` directory.
 
 
 Data flow
@@ -48,7 +49,7 @@ By default the BEA make and use tables _after redefinition_ are taken to
 calculate the direct requirement matrix but the script also works with the
 tables before redefinitions (which are also included in the data folder). The
 creation of the direct requirements matrix can be configured to apply scrap
-adjustments and remove value added sectors or not:
+adjustments and to remove value added sectors or not:
 
     # no scrap adjustments and removal of value added sectors
     import iodb    
@@ -60,7 +61,7 @@ adjustments and remove value added sectors or not:
 
 Additionally, the different build steps are independent from each other and
 consume and produce simple data formats. Thus, it should be possible to update
-the data sources (e.g. use the BEA 2007 statistics) without much effort.
+the data sources (e.g. by using the BEA 2007 statistics) without much effort.
 
 
 The CSV matrix format
