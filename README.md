@@ -46,27 +46,21 @@ Configuration
 -------------
 By default the BEA make and use tables _after redefinition_ are taken to 
 calculate the direct requirement matrix but the script also works with the
-tables before redefinitions (which are also included in the data folder). 
+tables before redefinitions (which are also included in the data folder). The
+creation of the direct requirements matrix can be configured to apply scrap
+adjustments and remove value added sectors or not:
 
-
-The requirements tables are created as described in 
-. 
-The `iodb` module currently contains a function for creating a direct 
-requirements coefficient matrix from raw use and make tables in the CSV matrix
-format as described above:
-
+    # no scrap adjustments and removal of value added sectors
     import iodb    
     iodb.create_drc_matrix(make_csv_file, use_csv_file, dr_csv_file)
-    
-This function optionally takes a name of a sector for scrap adjustments and a
-list of value added sectors:
 
+    # now with scrap adjustments and removal of value added sectors
     iodb.create_drc_matrix(make_csv_file, use_csv_file, drc_csv_file, 
                            scrap='Scrap', value_added=['VA1', 'VA2'])
-                           
-As a result of this function call the direct requirements coefficients are 
-written to the `drc_csv_file`. This file can then be used to calculate the
-total requirement table:
+
+Additionally, the different build steps are independent from each other and
+consume and produce simple data formats. Thus, it should be possible to update
+the data sources (e.g. use the BEA 2007 statistics) without much effort.
 
 
 The CSV matrix format
